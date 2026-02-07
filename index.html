@@ -1,0 +1,1359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Professional tattoo needle coverage calculator. Estimate session time, ink usage, and pricing for tattoo projects. Plan multi-session work with confidence. Free tool for tattoo artists.">
+    <meta name="keywords" content="tattoo coverage calculator, tattoo needle coverage, tattoo session time, tattoo pricing calculator, tattoo ink consumption, tattoo session planner, professional tattoo calculator">
+    <title>Professional Tattoo Needle Coverage Calculator | Tattoo Session Planner - Poli International</title>
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Professional Tattoo Needle Coverage Calculator - Free Tattoo Tool">
+    <meta property="og:description" content="Calculate tattoo coverage, estimate session time, plan ink usage, and price projects accurately. Professional tool for tattoo artists.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://poliinternational.com/tools/coverage-calculator/">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://storage.ko-fi.com">
+<script type='application/ld+json'>
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Tattoo Coverage Calculator",
+  "url": "https://poliinternational.com/tools/coverage-calculator/",
+  "description": "Estimate the area and time required for tattoo coverage",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript. Requires HTML5.",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "codeRepository": "https://github.com/poli-international/coverage-calculator",
+  "author": {
+    "@type": "Organization",
+    "name": "Poli International",
+    "url": "https://poliinternational.com",
+    "sameAs": [
+      "https://github.com/poli-international"
+    ]
+  },
+  "creator": {
+    "@type": "Organization",
+    "name": "Poli International",
+    "url": "https://poliinternational.com"
+  },
+  "maintainer": {
+    "@type": "Organization",
+    "name": "Poli International",
+    "url": "https://poliinternational.com"
+  },
+  "dateModified": "2026-02-07",
+  "license": "https://opensource.org/licenses/MIT",
+  "isAccessibleForFree": true
+}
+</script>
+
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Coverage Calculator | Poli International">
+    <meta name="twitter:description" content="Calculate tattoo session time and coverage area. Estimate ink usage and pricing for professional tattoo artists.">
+    <meta name="twitter:image" content="https://poliinternational.com/wp-content/uploads/poli-tools-preview.jpg">
+<style>
+/* Breadcrumb Styles */
+.breadcrumb-nav {
+    padding: 1rem 0;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.breadcrumb-nav a {
+    color: #0693e3;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.breadcrumb-nav a:hover {
+    color: #0575be;
+    text-decoration: underline;
+}
+
+.breadcrumb-nav span {
+    color: #666;
+    margin: 0 0.5rem;
+}
+
+.breadcrumb-nav strong {
+    color: #333;
+}
+
+/* Dark mode breadcrumb */
+body.dark-mode .breadcrumb-nav span {
+    color: #999;
+}
+
+body.dark-mode .breadcrumb-nav a {
+    color: #60a5fa;
+}
+
+body.dark-mode .breadcrumb-nav strong {
+    color: #e0e0e0;
+}
+</style>
+</head>
+<body class="coverage">
+<nav class="breadcrumb-nav" aria-label="Breadcrumb">
+    <a href="https://poliinternational.com/">Home</a>
+    <span>›</span>
+    <a href="https://poliinternational.com/tools/">Tools</a>
+    <span>›</span>
+    <a href="https://poliinternational.com/tools/#tattoo-tools">Tattoo Tools</a>
+    <span>›</span>
+    <strong>Coverage Calculator</strong>
+</nav>
+
+    <!-- Top Navigation Header (matching homepage style) -->
+    <header class="site-header">
+        <div class="site-header__container">
+            <a href="https://poliinternational.com/" class="site-header__logo-link">
+                <img src="images/Poli-International-Co.webp" alt="Poli International" class="site-header__logo">
+            </a>
+            <nav class="site-nav">
+                <a href="https://poliinternational.com/" class="site-nav__link">HOME</a>
+                <a href="https://poliinternational.com/who-we-are/" class="site-nav__link">ABOUT</a>
+                <a href="https://poliinternational.com/our-creation/" class="site-nav__link">INNOVATION</a>
+                <a href="https://poliinternational.com/they-trust-us/" class="site-nav__link">They trust us!</a>
+                <a href="https://poliinternational.com/contact-us/" class="site-nav__link">CONTACT</a>
+            </nav>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Tool Title Section -->
+    <section class="tool-title-section">
+        <div class="container">
+            <h1 class="tool-title">Tattoo Coverage Calculator & Session Planner</h1>
+            <p class="tool-subtitle">Estimate tattoo session time • Calculate ink coverage • Professional planning tool</p>
+        </div>
+    </section>
+
+
+
+    <!-- ═══════════════════════════════════════════════════════════
+         HEADER
+    ═══════════════════════════════════════════════════════════ -->
+    <header class="coverage__header">
+        <div class="coverage__header-container">
+            
+
+            <div class="coverage__header-controls">
+                <button id="embed-button" class="coverage__embed-button" aria-label="Get embed code">
+                    ⚡ Free Embed
+                </button>
+                <a href='https://ko-fi.com/C0C81NEXBV' target='_blank' class="coverage__kofi-button">
+                    <span class="kofi-icon">☕</span>
+                    <span class="kofi-text">Buy Me a Coffee</span>
+                </a>
+                <button id="theme-toggle" class="coverage__theme-toggle" aria-label="Toggle dark mode">
+                    <span class="coverage__theme-icon">◐</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         HERO SECTION
+    ═══════════════════════════════════════════════════════════ -->
+    <section class="coverage__hero">
+        <div class="coverage__hero-container">
+            <h2 class="coverage__title">Professional Tattoo Needle Coverage Calculator</h2>
+            <p class="coverage__subtitle">
+                Accurately estimate coverage area, session time, ink usage, and pricing for your tattoo projects.
+                Plan multi-session work with confidence.
+            </p>
+
+            <div class="coverage__hero-features">
+                <div class="coverage__hero-feature">
+                    <span class="coverage__hero-icon">📏</span>
+                    <span>Coverage Area</span>
+                </div>
+<!-- GitHub CTA -->
+<div class='github-cta' style='margin: 1.5rem 0;'>
+  <a href='https://github.com/poli-international/coverage-calculator' 
+     target='_blank' rel='noopener noreferrer' class='btn-github' 
+     style='display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; background: #24292e; color: #ffffff; border-radius: 6px; text-decoration: none; font-weight: 500;'>
+    <svg width='20' height='20' viewBox='0 0 16 16' fill='currentColor'>
+      <path d='M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z'/>
+    </svg>
+    <span>View on GitHub</span>
+  </a>
+</div>
+<!-- GitHub Stats -->
+<div class='github-stats' style='display: flex; gap: 0.5rem; flex-wrap: wrap; margin: 1rem 0;'>
+  <img src='https://img.shields.io/github/stars/poli-international/coverage-calculator?style=social' alt='Stars' loading='lazy'>
+  <img src='https://img.shields.io/github/last-commit/poli-international/coverage-calculator' alt='Last commit' loading='lazy'>
+</div>
+
+                <div class="coverage__hero-feature">
+                    <span class="coverage__hero-icon">⏱️</span>
+                    <span>Session Time</span>
+                </div>
+                <div class="coverage__hero-feature">
+                    <span class="coverage__hero-icon">💧</span>
+                    <span>Ink Usage</span>
+                </div>
+                <div class="coverage__hero-feature">
+                    <span class="coverage__hero-icon">💰</span>
+                    <span>Pricing</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         MAIN CALCULATOR INTERFACE
+    ═══════════════════════════════════════════════════════════ -->
+    <main class="coverage__main">
+        <div class="coverage__container">
+
+            <!-- CALCULATOR TABS -->
+            <nav class="coverage__tabs" role="tablist">
+                <button class="coverage__tab coverage__tab--active"
+                        role="tab"
+                        aria-selected="true"
+                        aria-controls="coverage-panel"
+                        data-tab="coverage">
+                    📏 Coverage Calculator
+                </button>
+                <button class="coverage__tab"
+                        role="tab"
+                        aria-selected="false"
+                        aria-controls="session-panel"
+                        data-tab="session">
+                    ⏱️ Session Estimator
+                </button>
+                <button class="coverage__tab"
+                        role="tab"
+                        aria-selected="false"
+                        aria-controls="ink-panel"
+                        data-tab="ink">
+                    💧 Ink Calculator
+                </button>
+                <button class="coverage__tab"
+                        role="tab"
+                        aria-selected="false"
+                        aria-controls="pricing-panel"
+                        data-tab="pricing">
+                    💰 Pricing Tool
+                </button>
+            </nav>
+
+            <!-- ═══════════════════════════════════════════════════════════
+                 TAB 1: COVERAGE AREA CALCULATOR
+            ═══════════════════════════════════════════════════════════ -->
+            <div id="coverage-panel"
+                 class="coverage__panel coverage__panel--active"
+                 role="tabpanel"
+                 aria-labelledby="coverage-tab">
+
+                <div class="coverage__panel-content">
+                    <h2 class="coverage__section-title">Coverage Area Calculator</h2>
+                    <p class="coverage__section-description">
+                        Calculate how much skin area you can cover based on needle configuration, technique, and session duration.
+                    </p>
+
+                    <form id="coverage-form" class="coverage__form">
+                        <div class="coverage__form-grid">
+
+                            <!-- Needle Configuration -->
+                            <div class="coverage__form-group">
+                                <label for="needle-config" class="coverage__label">
+                                    <span class="coverage__label-text">Needle Configuration</span>
+                                    <span class="coverage__label-icon">💉</span>
+                                </label>
+                                <select id="needle-config" class="coverage__select" required>
+                                    <option value="">Select needle...</option>
+                                    <optgroup label="Round Liners">
+                                        <option value="1RL">1RL - Single Needle (Micro Detail)</option>
+                                        <option value="3RL">3RL - Fine Lines</option>
+                                        <option value="5RL">5RL - Standard Outlines</option>
+                                        <option value="7RL">7RL - Medium Bold Lines</option>
+                                        <option value="9RL">9RL - Bold Outlines</option>
+                                    </optgroup>
+                                    <optgroup label="Round Shaders">
+                                        <option value="5RS">5RS - Light Shading</option>
+                                        <option value="7RS">7RS - Medium Shading</option>
+                                        <option value="9RS">9RS - Heavy Shading</option>
+                                    </optgroup>
+                                    <optgroup label="Magnums (M1)">
+                                        <option value="7M1">7M1 - Soft Shading</option>
+                                        <option value="9M1">9M1 - Workhorse Shader</option>
+                                        <option value="11M1">11M1 - Large Area Coverage</option>
+                                        <option value="13M1">13M1 - Fast Coverage</option>
+                                        <option value="15M2">15M2 - Maximum Coverage</option>
+                                        <option value="18M2">18M2 - Large Pieces</option>
+                                    </optgroup>
+                                    <optgroup label="Curved Magnums">
+                                        <option value="9CM">9CM - Smooth Gradients</option>
+                                        <option value="11CM">11CM - Realism Work</option>
+                                        <option value="13CM">13CM - Large Smooth Areas</option>
+                                    </optgroup>
+                                </select>
+                                <span class="coverage__help-text">Choose your needle type</span>
+                            </div>
+
+                            <!-- Technique -->
+                            <div class="coverage__form-group">
+                                <label for="technique" class="coverage__label">
+                                    <span class="coverage__label-text">Technique</span>
+                                    <span class="coverage__label-icon">🎨</span>
+                                </label>
+                                <select id="technique" class="coverage__select" required>
+                                    <option value="">Select technique...</option>
+                                    <option value="lining">Lining (Outlines)</option>
+                                    <option value="shading">Shading (Gradients)</option>
+                                    <option value="color-packing">Color Packing (Solid Fill)</option>
+                                    <option value="dotwork">Dotwork (Stippling)</option>
+                                    <option value="whip-shading">Whip Shading</option>
+                                </select>
+                                <span class="coverage__help-text">What technique are you using?</span>
+                            </div>
+
+                            <!-- Work Speed -->
+                            <div class="coverage__form-group">
+                                <label for="work-speed" class="coverage__label">
+                                    <span class="coverage__label-text">Work Speed</span>
+                                    <span class="coverage__label-icon">⚡</span>
+                                </label>
+                                <select id="work-speed" class="coverage__select" required>
+                                    <option value="">Select speed...</option>
+                                    <option value="slow">Slow/Detail Work (Precision)</option>
+                                    <option value="medium">Medium Speed (Standard)</option>
+                                    <option value="fast">Fast/Bold Work (Coverage)</option>
+                                </select>
+                                <span class="coverage__help-text">Your typical working pace</span>
+                            </div>
+
+                            <!-- Session Duration -->
+                            <div class="coverage__form-group">
+                                <label for="session-hours" class="coverage__label">
+                                    <span class="coverage__label-text">Session Duration (hours)</span>
+                                    <span class="coverage__label-icon">⏰</span>
+                                </label>
+                                <input type="number"
+                                       id="session-hours"
+                                       class="coverage__input"
+                                       min="0.5"
+                                       max="12"
+                                       step="0.5"
+                                       value="3"
+                                       required>
+                                <span class="coverage__help-text">Typical session length</span>
+                            </div>
+
+                            <!-- Break Time -->
+                            <div class="coverage__form-group">
+                                <label for="break-time" class="coverage__label">
+                                    <span class="coverage__label-text">Break Time (min/hour)</span>
+                                    <span class="coverage__label-icon">☕</span>
+                                </label>
+                                <input type="number"
+                                       id="break-time"
+                                       class="coverage__input"
+                                       min="0"
+                                       max="30"
+                                       step="5"
+                                       value="10"
+                                       required>
+                                <span class="coverage__help-text">Average break duration</span>
+                            </div>
+
+                            <!-- Number of Passes -->
+                            <div class="coverage__form-group">
+                                <label for="passes" class="coverage__label">
+                                    <span class="coverage__label-text">Number of Passes</span>
+                                    <span class="coverage__label-icon">🔁</span>
+                                </label>
+                                <input type="number"
+                                       id="passes"
+                                       class="coverage__input"
+                                       min="1"
+                                       max="10"
+                                       step="1"
+                                       value="2"
+                                       required>
+                                <span class="coverage__help-text">How many passes over the area?</span>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="coverage__calculate-button">
+                            <span class="coverage__button-icon">📊</span>
+                            Calculate Coverage
+                        </button>
+                    </form>
+
+                    <!-- Coverage Results -->
+                    <div id="coverage-results" class="coverage__results" style="display: none;">
+                        <div class="coverage__results-header">
+                            <h3 class="coverage__results-title">Coverage Estimate</h3>
+                            
+                        </div>
+
+                        <div class="coverage__results-grid">
+                            <div class="coverage__result-card coverage__result-card--primary">
+                                <div class="coverage__result-icon">📐</div>
+                                <div class="coverage__result-label">Total Coverage</div>
+                                
+                                <div class="coverage__result-sublabel">Square inches</div>
+                            </div>
+
+                            <div class="coverage__result-card">
+                                <div class="coverage__result-icon">📏</div>
+                                <div class="coverage__result-label">Coverage (Metric)</div>
+                                
+                                <div class="coverage__result-sublabel">Square centimeters</div>
+                            </div>
+
+                            <div class="coverage__result-card">
+                                <div class="coverage__result-icon">⏱️</div>
+                                <div class="coverage__result-label">Working Time</div>
+                                
+                                <div class="coverage__result-sublabel">Actual tattooing</div>
+                            </div>
+
+                            <div class="coverage__result-card">
+                                <div class="coverage__result-icon">📊</div>
+                                <div class="coverage__result-label">Coverage Rate</div>
+                                
+                                <div class="coverage__result-sublabel">Sq in per hour</div>
+                            </div>
+                        </div>
+
+                        
+                        
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══════════════════════════════════════════════════════════
+                 TAB 2: SESSION TIME ESTIMATOR
+            ═══════════════════════════════════════════════════════════ -->
+            <div id="session-panel"
+                 class="coverage__panel"
+                 role="tabpanel"
+                 aria-labelledby="session-tab">
+
+                <div class="coverage__panel-content">
+                    <h2 class="coverage__section-title">Session Time Estimator</h2>
+                    <p class="coverage__section-description">
+                        Estimate realistic session time based on tattoo size, complexity, and body location.
+                    </p>
+
+                    <form id="session-form" class="coverage__form">
+                        <div class="coverage__form-grid">
+
+                            <!-- Tattoo Width -->
+                            <div class="coverage__form-group">
+                                <label for="tattoo-width" class="coverage__label">
+                                    <span class="coverage__label-text">Width (inches)</span>
+                                    <span class="coverage__label-icon">↔️</span>
+                                </label>
+                                <input type="number"
+                                       id="tattoo-width"
+                                       class="coverage__input"
+                                       min="0.5"
+                                       max="24"
+                                       step="0.25"
+                                       placeholder="e.g., 6"
+                                       required>
+                                <span class="coverage__help-text">Horizontal measurement</span>
+                            </div>
+
+                            <!-- Tattoo Height -->
+                            <div class="coverage__form-group">
+                                <label for="tattoo-height" class="coverage__label">
+                                    <span class="coverage__label-text">Height (inches)</span>
+                                    <span class="coverage__label-icon">↕️</span>
+                                </label>
+                                <input type="number"
+                                       id="tattoo-height"
+                                       class="coverage__input"
+                                       min="0.5"
+                                       max="24"
+                                       step="0.25"
+                                       placeholder="e.g., 8"
+                                       required>
+                                <span class="coverage__help-text">Vertical measurement</span>
+                            </div>
+
+                            <!-- Design Complexity -->
+                            <div class="coverage__form-group coverage__form-group--full">
+                                <label for="complexity" class="coverage__label">
+                                    <span class="coverage__label-text">Design Complexity</span>
+                                    <span class="coverage__label-icon">🎨</span>
+                                </label>
+                                <select id="complexity" class="coverage__select" required>
+                                    <option value="">Select complexity...</option>
+                                    <option value="simple-bold">Simple Bold (Traditional, minimal shading)</option>
+                                    <option value="medium-detail">Medium Detail (Standard work, moderate shading)</option>
+                                    <option value="high-detail">High Detail (Intricate work, careful shading)</option>
+                                    <option value="photorealistic">Photorealistic (Extreme detail, multiple layers)</option>
+                                    <option value="micro-detail">Micro Detail (Tiny intricate work, single needle)</option>
+                                </select>
+                                <span class="coverage__help-text">How complex is the design?</span>
+                            </div>
+
+                            <!-- Color Work -->
+                            <div class="coverage__form-group">
+                                <label for="color-work" class="coverage__label">
+                                    <span class="coverage__label-text">Color Work</span>
+                                    <span class="coverage__label-icon">🌈</span>
+                                </label>
+                                <select id="color-work" class="coverage__select" required>
+                                    <option value="">Select color type...</option>
+                                    <option value="blackgrey">Black & Grey Only</option>
+                                    <option value="limited-color">Limited Color (2-4 colors)</option>
+                                    <option value="full-color">Full Color (5+ colors)</option>
+                                </select>
+                                <span class="coverage__help-text">Color complexity</span>
+                            </div>
+
+                            <!-- Body Location -->
+                            <div class="coverage__form-group">
+                                <label for="body-location" class="coverage__label">
+                                    <span class="coverage__label-text">Body Location</span>
+                                    <span class="coverage__label-icon">👤</span>
+                                </label>
+                                <select id="body-location" class="coverage__select" required>
+                                    <option value="">Select location...</option>
+                                    <optgroup label="Easy Locations">
+                                        <option value="outer-upper-arm">Outer Upper Arm</option>
+                                        <option value="outer-forearm">Outer Forearm</option>
+                                        <option value="outer-calf">Outer Calf</option>
+                                        <option value="shoulder">Shoulder</option>
+                                        <option value="upper-back">Upper Back</option>
+                                    </optgroup>
+                                    <optgroup label="Medium Locations">
+                                        <option value="chest">Chest</option>
+                                        <option value="thigh">Thigh</option>
+                                        <option value="inner-forearm">Inner Forearm</option>
+                                        <option value="lower-back">Lower Back</option>
+                                    </optgroup>
+                                    <optgroup label="Difficult Locations">
+                                        <option value="ribs">Ribs</option>
+                                        <option value="neck">Neck</option>
+                                        <option value="hands">Hands</option>
+                                        <option value="feet">Feet</option>
+                                        <option value="spine">Spine</option>
+                                        <option value="elbow-ditch">Elbow Ditch</option>
+                                        <option value="knee-ditch">Knee Ditch</option>
+                                    </optgroup>
+                                </select>
+                                <span class="coverage__help-text">Affects difficulty and session length</span>
+                            </div>
+
+                            <!-- Client Pain Tolerance -->
+                            <div class="coverage__form-group">
+                                <label for="pain-tolerance" class="coverage__label">
+                                    <span class="coverage__label-text">Client Pain Tolerance</span>
+                                    <span class="coverage__label-icon">💪</span>
+                                </label>
+                                <select id="pain-tolerance" class="coverage__select" required>
+                                    <option value="">Select tolerance...</option>
+                                    <option value="high">High (Few breaks needed)</option>
+                                    <option value="medium">Medium (Standard breaks)</option>
+                                    <option value="low">Low (Frequent breaks)</option>
+                                </select>
+                                <span class="coverage__help-text">Affects total session time</span>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="coverage__calculate-button">
+                            <span class="coverage__button-icon">⏱️</span>
+                            Estimate Session Time
+                        </button>
+                    </form>
+
+                    <!-- Session Results -->
+                    <div id="session-results" class="coverage__results" style="display: none;">
+                        <div class="coverage__results-header">
+                            <h3 class="coverage__results-title">Time Estimate</h3>
+                            
+                        </div>
+
+                        <div class="coverage__results-grid">
+                            <div class="coverage__result-card coverage__result-card--primary">
+                                <div class="coverage__result-icon">⏰</div>
+                                <div class="coverage__result-label">Total Time</div>
+                                
+                                <div class="coverage__result-sublabel">Hours needed</div>
+                            </div>
+
+                            <div class="coverage__result-card">
+                                <div class="coverage__result-icon">📅</div>
+                                <div class="coverage__result-label">Sessions Needed</div>
+                                
+                                <div class="coverage__result-sublabel">Recommended sessions</div>
+                            </div>
+
+                            <div class="coverage__result-card">
+                                <div class="coverage__result-icon">⏱️</div>
+                                <div class="coverage__result-label">Per Session</div>
+                                
+                                <div class="coverage__result-sublabel">Hours each</div>
+                            </div>
+
+                            <div class="coverage__result-card">
+                                <div class="coverage__result-icon">📆</div>
+                                <div class="coverage__result-label">Timeline</div>
+                                
+                                <div class="coverage__result-sublabel">Weeks to complete</div>
+                            </div>
+                        </div>
+
+                        
+                        
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══════════════════════════════════════════════════════════
+                 TAB 3: INK CONSUMPTION CALCULATOR
+            ═══════════════════════════════════════════════════════════ -->
+            <div id="ink-panel"
+                 class="coverage__panel"
+                 role="tabpanel"
+                 aria-labelledby="ink-tab">
+
+                <div class="coverage__panel-content">
+                    <h2 class="coverage__section-title">Ink Consumption Calculator</h2>
+                    <p class="coverage__section-description">
+                        Calculate estimated ink usage based on coverage area, technique, and saturation level.
+                    </p>
+
+                    <form id="ink-form" class="coverage__form">
+                        <div class="coverage__form-grid">
+
+                            <!-- Coverage Area -->
+                            <div class="coverage__form-group">
+                                <label for="ink-area" class="coverage__label">
+                                    <span class="coverage__label-text">Coverage Area (sq in)</span>
+                                    <span class="coverage__label-icon">📐</span>
+                                </label>
+                                <input type="number"
+                                       id="ink-area"
+                                       class="coverage__input"
+                                       min="0.25"
+                                       max="500"
+                                       step="0.25"
+                                       placeholder="e.g., 48"
+                                       required>
+                                <span class="coverage__help-text">Total tattoo area</span>
+                            </div>
+
+                            <!-- Ink Technique -->
+                            <div class="coverage__form-group">
+                                <label for="ink-technique" class="coverage__label">
+                                    <span class="coverage__label-text">Technique</span>
+                                    <span class="coverage__label-icon">🎨</span>
+                                </label>
+                                <select id="ink-technique" class="coverage__select" required>
+                                    <option value="">Select technique...</option>
+                                    <option value="lining">Lining (Minimal ink usage)</option>
+                                    <option value="light-shading">Light Shading (Gradients)</option>
+                                    <option value="medium-shading">Medium Shading (Standard B&G)</option>
+                                    <option value="solid-black">Solid Black (High consumption)</option>
+                                    <option value="color-packing">Color Packing (Multiple colors)</option>
+                                    <option value="color-blending">Color Blending (Mixed colors)</option>
+                                </select>
+                                <span class="coverage__help-text">How are you working?</span>
+                            </div>
+
+                            <!-- Saturation Level -->
+                            <div class="coverage__form-group">
+                                <label for="saturation" class="coverage__label">
+                                    <span class="coverage__label-text">Saturation Level</span>
+                                    <span class="coverage__label-icon">💧</span>
+                                </label>
+                                <select id="saturation" class="coverage__select" required>
+                                    <option value="">Select saturation...</option>
+                                    <option value="light">Light (Subtle, thin wash)</option>
+                                    <option value="medium">Medium (Standard saturation)</option>
+                                    <option value="heavy">Heavy/Solid (Full saturation)</option>
+                                </select>
+                                <span class="coverage__help-text">Ink density</span>
+                            </div>
+
+                            <!-- Number of Colors -->
+                            <div class="coverage__form-group">
+                                <label for="color-count" class="coverage__label">
+                                    <span class="coverage__label-text">Number of Colors</span>
+                                    <span class="coverage__label-icon">🎨</span>
+                                </label>
+                                <input type="number"
+                                       id="color-count"
+                                       class="coverage__input"
+                                       min="1"
+                                       max="20"
+                                       step="1"
+                                       value="1"
+                                       required>
+                                <span class="coverage__help-text">Including black</span>
+                            </div>
+
+                            <!-- Passes Required -->
+                            <div class="coverage__form-group">
+                                <label for="ink-passes" class="coverage__label">
+                                    <span class="coverage__label-text">Passes Required</span>
+                                    <span class="coverage__label-icon">🔁</span>
+                                </label>
+                                <input type="number"
+                                       id="ink-passes"
+                                       class="coverage__input"
+                                       min="1"
+                                       max="10"
+                                       step="1"
+                                       value="2"
+                                       required>
+                                <span class="coverage__help-text">How many passes?</span>
+                            </div>
+
+                            <!-- Waste Factor -->
+                            <div class="coverage__form-group">
+                                <label for="waste-factor" class="coverage__label">
+                                    <span class="coverage__label-text">Waste Factor</span>
+                                    <span class="coverage__label-icon">♻️</span>
+                                </label>
+                                <select id="waste-factor" class="coverage__select" required>
+                                    <option value="">Select waste level...</option>
+                                    <option value="low">Low (1.2x - Experienced)</option>
+                                    <option value="medium">Medium (1.4x - Standard)</option>
+                                    <option value="high">High (1.6x - Color mixing)</option>
+                                </select>
+                                <span class="coverage__help-text">Typical waste multiplier</span>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="coverage__calculate-button">
+                            <span class="coverage__button-icon">💧</span>
+                            Calculate Ink Usage
+                        </button>
+                    </form>
+
+                    <!-- Ink Results -->
+                    <div id="ink-results" class="coverage__results" style="display: none;">
+                        <div class="coverage__results-header">
+                            <h3 class="coverage__results-title">Ink Consumption</h3>
+                        </div>
+
+                        <div class="coverage__results-grid">
+                            <div class="coverage__result-card coverage__result-card--primary">
+                                <div class="coverage__result-icon">💧</div>
+                                <div class="coverage__result-label">Total Ink</div>
+                                
+                                <div class="coverage__result-sublabel">Milliliters</div>
+                            </div>
+
+                            <div class="coverage__result-card">
+                                <div class="coverage__result-icon">🎨</div>
+                                <div class="coverage__result-label">Per Color</div>
+                                
+                                <div class="coverage__result-sublabel">ML each</div>
+                            </div>
+
+                            <div class="coverage__result-card">
+                                <div class="coverage__result-icon">🧪</div>
+                                <div class="coverage__result-label">Ink Caps</div>
+                                
+                                <div class="coverage__result-sublabel">5ml caps needed</div>
+                            </div>
+
+                            <div class="coverage__result-card">
+                                <div class="coverage__result-icon">💰</div>
+                                <div class="coverage__result-label">Cost Estimate</div>
+                                
+                                <div class="coverage__result-sublabel">Ink cost</div>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══════════════════════════════════════════════════════════
+                 TAB 4: PRICING CALCULATOR
+            ═══════════════════════════════════════════════════════════ -->
+            <div id="pricing-panel"
+                 class="coverage__panel"
+                 role="tabpanel"
+                 aria-labelledby="pricing-tab">
+
+                <div class="coverage__panel-content">
+                    <h2 class="coverage__section-title">Pricing Calculator</h2>
+                    <p class="coverage__section-description">
+                        Calculate suggested pricing based on time, complexity, and your hourly rate.
+                    </p>
+
+                    <form id="pricing-form" class="coverage__form">
+                        <div class="coverage__form-grid">
+
+                            <!-- Total Hours -->
+                            <div class="coverage__form-group">
+                                <label for="pricing-hours" class="coverage__label">
+                                    <span class="coverage__label-text">Total Hours</span>
+                                    <span class="coverage__label-icon">⏰</span>
+                                </label>
+                                <input type="number"
+                                       id="pricing-hours"
+                                       class="coverage__input"
+                                       min="0.5"
+                                       max="100"
+                                       step="0.5"
+                                       placeholder="e.g., 8"
+                                       required>
+                                <span class="coverage__help-text">Estimated total time</span>
+                            </div>
+
+                            <!-- Hourly Rate -->
+                            <div class="coverage__form-group">
+                                <label for="hourly-rate" class="coverage__label">
+                                    <span class="coverage__label-text">Hourly Rate ($)</span>
+                                    <span class="coverage__label-icon">💵</span>
+                                </label>
+                                <input type="number"
+                                       id="hourly-rate"
+                                       class="coverage__input"
+                                       min="50"
+                                       max="500"
+                                       step="10"
+                                       placeholder="e.g., 150"
+                                       required>
+                                <span class="coverage__help-text">Your standard rate</span>
+                            </div>
+
+                            <!-- Pricing Complexity -->
+                            <div class="coverage__form-group">
+                                <label for="pricing-complexity" class="coverage__label">
+                                    <span class="coverage__label-text">Design Complexity</span>
+                                    <span class="coverage__label-icon">🎨</span>
+                                </label>
+                                <select id="pricing-complexity" class="coverage__select" required>
+                                    <option value="">Select complexity...</option>
+                                    <option value="simple-bold">Simple Bold (0.9x)</option>
+                                    <option value="medium-detail">Medium Detail (1.0x)</option>
+                                    <option value="high-detail">High Detail (1.2x)</option>
+                                    <option value="photorealistic">Photorealistic (1.5x)</option>
+                                    <option value="micro-detail">Micro Detail (1.8x)</option>
+                                </select>
+                                <span class="coverage__help-text">Affects final price</span>
+                            </div>
+
+                            <!-- Coverage Area -->
+                            <div class="coverage__form-group">
+                                <label for="pricing-area" class="coverage__label">
+                                    <span class="coverage__label-text">Total Area (sq in)</span>
+                                    <span class="coverage__label-icon">📐</span>
+                                </label>
+                                <input type="number"
+                                       id="pricing-area"
+                                       class="coverage__input"
+                                       min="1"
+                                       max="500"
+                                       step="1"
+                                       placeholder="e.g., 48"
+                                       required>
+                                <span class="coverage__help-text">For per-sq-inch calculation</span>
+                            </div>
+
+                            <!-- Deposit Percentage -->
+                            <div class="coverage__form-group">
+                                <label for="deposit-percent" class="coverage__label">
+                                    <span class="coverage__label-text">Deposit %</span>
+                                    <span class="coverage__label-icon">💳</span>
+                                </label>
+                                <input type="number"
+                                       id="deposit-percent"
+                                       class="coverage__input"
+                                       min="0"
+                                       max="100"
+                                       step="5"
+                                       value="20"
+                                       required>
+                                <span class="coverage__help-text">Upfront deposit</span>
+                            </div>
+
+                            <!-- Number of Sessions -->
+                            <div class="coverage__form-group">
+                                <label for="pricing-sessions" class="coverage__label">
+                                    <span class="coverage__label-text">Sessions</span>
+                                    <span class="coverage__label-icon">📅</span>
+                                </label>
+                                <input type="number"
+                                       id="pricing-sessions"
+                                       class="coverage__input"
+                                       min="1"
+                                       max="20"
+                                       step="1"
+                                       value="1"
+                                       required>
+                                <span class="coverage__help-text">Multi-session project?</span>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="coverage__calculate-button">
+                            <span class="coverage__button-icon">💰</span>
+                            Calculate Price
+                        </button>
+                    </form>
+
+                    <!-- Pricing Results -->
+                    <div id="pricing-results" class="coverage__results" style="display: none;">
+                        <div class="coverage__results-header">
+                            <h3 class="coverage__results-title">Pricing Estimate</h3>
+                            
+                        </div>
+
+                        <div class="coverage__results-grid">
+                            <div class="coverage__result-card coverage__result-card--primary">
+                                <div class="coverage__result-icon">💰</div>
+                                <div class="coverage__result-label">Suggested Price</div>
+                                
+                                <div class="coverage__result-sublabel">Total project</div>
+                            </div>
+
+                            <div class="coverage__result-card">
+                                <div class="coverage__result-icon">📊</div>
+                                <div class="coverage__result-label">Price Range</div>
+                                
+                                <div class="coverage__result-sublabel">Min - Max</div>
+                            </div>
+
+                            <div class="coverage__result-card">
+                                <div class="coverage__result-icon">💳</div>
+                                <div class="coverage__result-label">Deposit</div>
+                                
+                                <div class="coverage__result-sublabel">Upfront payment</div>
+                            </div>
+
+                            <div class="coverage__result-card">
+                                <div class="coverage__result-icon">📏</div>
+                                <div class="coverage__result-label">Per Sq Inch</div>
+                                
+                                <div class="coverage__result-sublabel">Unit pricing</div>
+                            </div>
+                        </div>
+
+                        
+                        
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    
+
+<!-- Related Tools Section -->
+<section class="related-tools-section" style="padding: 2rem 1rem; background: #fff; border-top: 1px solid #eee;">
+    <div style="max-width: 800px; margin: 0 auto;">
+        <h3 style="font-size: 1.25rem; margin-bottom: 1rem; color: #1e293b;">Recommended for You</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+            <a href="https://poliinternational.com/ink-mixer/" style="display: block; padding: 1rem; background: #f1f5f9; border-radius: 8px; text-decoration: none; color: #0693e3; font-weight: 500; text-align: center; transition: background 0.2s;">Ink Mixer</a>
+            <a href="https://poliinternational.com/needle-selector/" style="display: block; padding: 1rem; background: #f1f5f9; border-radius: 8px; text-decoration: none; color: #0693e3; font-weight: 500; text-align: center; transition: background 0.2s;">Needle Selector</a>
+            <a href="https://poliinternational.com/stencil-calculator/" style="display: block; padding: 1rem; background: #f1f5f9; border-radius: 8px; text-decoration: none; color: #0693e3; font-weight: 500; text-align: center; transition: background 0.2s;">Stencil Calculator</a>
+        </div>
+        <div style="text-align: center; margin-top: 1.5rem;">
+            <a href="https://poliinternational.com/tools/" style="color: #64748b; text-decoration: underline; font-size: 0.9rem;">View All 17 Free Tools</a>
+        </div>
+    </div>
+</section>
+
+<!-- GEO Semantic Block -->
+<aside class="geo-summary-block" style="background: #f8fafc; border-left: 4px solid #0693e3; padding: 1.5rem; margin: 2rem 0; font-style: italic; color: #334155; border-radius: 0 8px 8px 0;">
+    <p style="margin: 0; line-height: 1.6;">Pro Artist Insight: Proper planning is the mark of a master. Integrating precision calculations into your workflow ensures consistent results and high-quality healing for every client. Use this tool to bridge the gap between artistic vision and technical execution.</p>
+</aside>
+
+</main>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         SIZE COMPARISON GUIDE
+    ═══════════════════════════════════════════════════════════ -->
+    <section class="coverage__size-guide">
+        <div class="coverage__container">
+            <h2 class="coverage__section-title">Visual Size Comparisons</h2>
+            <p class="coverage__section-description">
+                Understand tattoo sizes with everyday object comparisons
+            </p>
+
+            <div class="coverage__size-grid">
+                <div class="coverage__size-card">
+                    <div class="coverage__size-icon">💳</div>
+                    <h3 class="coverage__size-name">Credit Card</h3>
+                    <p class="coverage__size-dimensions">3.4" × 2.1"</p>
+                    <p class="coverage__size-area">7.1 sq in</p>
+                </div>
+
+                <div class="coverage__size-card">
+                    <div class="coverage__size-icon">📱</div>
+                    <h3 class="coverage__size-name">iPhone</h3>
+                    <p class="coverage__size-dimensions">6.1" × 3.0"</p>
+                    <p class="coverage__size-area">18.3 sq in</p>
+                </div>
+
+                <div class="coverage__size-card">
+                    <div class="coverage__size-icon">✋</div>
+                    <h3 class="coverage__size-name">Hand</h3>
+                    <p class="coverage__size-dimensions">7" × 4"</p>
+                    <p class="coverage__size-area">28 sq in</p>
+                </div>
+
+                <div class="coverage__size-card">
+                    <div class="coverage__size-icon">✉️</div>
+                    <h3 class="coverage__size-name">Envelope</h3>
+                    <p class="coverage__size-dimensions">9.5" × 4.1"</p>
+                    <p class="coverage__size-area">39 sq in</p>
+                </div>
+
+                <div class="coverage__size-card">
+                    <div class="coverage__size-icon">📄</div>
+                    <h3 class="coverage__size-name">Paper (Half)</h3>
+                    <p class="coverage__size-dimensions">8.5" × 5.5"</p>
+                    <p class="coverage__size-area">47 sq in</p>
+                </div>
+
+                <div class="coverage__size-card">
+                    <div class="coverage__size-icon">📃</div>
+                    <h3 class="coverage__size-name">Full Page</h3>
+                    <p class="coverage__size-dimensions">8.5" × 11"</p>
+                    <p class="coverage__size-area">93.5 sq in</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         DISCLAIMERS
+    ═══════════════════════════════════════════════════════════ -->
+    <section class="coverage__disclaimers">
+        <div class="coverage__container">
+            <div class="coverage__disclaimer-box coverage__disclaimer-box--warning">
+                <h3 class="coverage__disclaimer-title">⚠️ Important Disclaimers</h3>
+                <div class="coverage__disclaimer-content">
+                    <p><strong>Coverage and Time Estimates:</strong> All calculations are based on industry averages and may vary significantly based on individual artist skill, technique, client skin type, design complexity, and other factors. Always use professional judgment and adjust estimates based on your experience.</p>
+
+                    <p><strong>Pricing Guidance:</strong> Pricing recommendations are for reference only. Actual pricing should consider your local market, overhead costs, experience level, and business model. This tool does not provide financial advice.</p>
+
+                    <p><strong>Ink Consumption:</strong> Ink estimates include typical waste factors but may vary based on technique, equipment, and artist efficiency.</p>
+
+                    <p><strong>Client Safety:</strong> Always prioritize client wellbeing over speed. Some clients may require shorter or longer sessions than estimated. Watch for signs of fatigue, pain, or shock.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         EMAIL CAPTURE FORM (Footer Location)
+    ═══════════════════════════════════════════════════════════ -->
+    <section class="coverage__email-section">
+        <div class="coverage__container">
+            <div class="coverage__email-box">
+                <h2 class="coverage__email-title">🔔 Get Notified of New Tools!</h2>
+                <p class="coverage__email-subtitle">Be first to know when we launch new free tools for tattoo professionals.</p>
+
+                <form id="footer-email-form" class="coverage__email-form" data-location="footer">
+                    <div class="coverage__email-input-group">
+                        <input type="email"
+                               id="footer-email-input"
+                               class="coverage__email-input"
+                               placeholder="Your email address"
+                               required
+                               aria-label="Email address">
+                        <button type="submit" class="coverage__email-submit">Notify Me</button>
+                    </div>
+                    <p class="coverage__email-success" id="footer-email-success" style="display: none;">
+                        ✅ Thanks! We'll notify you when new tools launch!
+                    </p>
+                    <p class="coverage__email-error" id="footer-email-error" style="display: none;">
+                        ❌ Please enter a valid email address.
+                    </p>
+                    <div class="coverage__email-trust">
+                        <span>✅ Free tool updates only</span>
+                        <span>✅ No spam</span>
+                        <span>✅ Unsubscribe anytime</span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         KO-FI SECTION (Footer Location)
+    ═══════════════════════════════════════════════════════════ -->
+    <section class="coverage__kofi-section">
+        <div class="coverage__container">
+            <p class="coverage__kofi-text">☕ Enjoy this free tool? Support development of more professional resources!</p>
+            <a href='https://ko-fi.com/C0C81NEXBV' target='_blank' class="coverage__kofi">
+                <img src='https://storage.ko-fi.com/cdn/kofi6.png?v=6'
+                     border='0'
+                     alt='Buy Me a Coffee at ko-fi.com'
+                     class="coverage__kofi-img" />
+            </a>
+        </div>
+    </section>
+
+        <!-- MORE TOOLS NAVIGATION -->
+    <section class="coverage-calc__more-tools">
+        <div class="coverage-calc__container" style="text-align: center; padding: 2rem 1rem;">
+            <p style="font-size: 1.05rem; margin: 0; color: #666;">
+                <a href="https://poliinternational.com/tools" target="_blank" rel="noopener" style="color: #0693e3; text-decoration: none; font-weight: 600; transition: color 0.2s;">
+                    Explore all our free professional tools →
+                </a>
+            </p>
+        </div>
+    </section>
+
+
+    <!-- Community Feedback Section -->
+    <section class="community-feedback">
+        <div class="container">
+            <div class="feedback-card">
+                <div class="feedback-header">
+                    <h2 class="feedback-title">💬 Help Us Build Better Tools, Friend!</h2>
+                    <p class="feedback-subtitle">
+                        Hey there, fellow body art enthusiast! Whether you're a professional tattooist, piercer, or someone who loves body art as much as we do – we're all in this together.
+                        Our passion doesn't get much support out there, so let's stick together and build the best tools to help our community thrive!
+                    </p>
+                    <p class="feedback-callout">
+                        <strong>Your feedback matters!</strong> Found something useful? Got ideas for improvements? We're all ears!
+                        Help us make this tool even better for everyone in our body art family.
+                    </p>
+                </div>
+
+                <form class="feedback-form" id="feedbackForm">
+                    <div class="feedback-form-grid">
+                        <div class="form-group">
+                            <label for="userEmail" class="form-label">Your Email (so we can reply!)</label>
+                            <input type="email" id="userEmail" name="userEmail" class="form-input"
+                                   placeholder="your.email@example.com" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="userRole" class="form-label">You are a...</label>
+                            <select id="userRole" name="userRole" class="form-select" required>
+                                <option value="">Choose one</option>
+                                <option value="tattoo_artist">Tattoo Artist</option>
+                                <option value="piercer">Professional Piercer</option>
+                                <option value="shop_owner">Shop Owner</option>
+                                <option value="apprentice">Apprentice</option>
+                                <option value="enthusiast">Body Art Enthusiast/Customer</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="feedbackText" class="form-label">Share Your Thoughts, Ideas, or Suggestions</label>
+                        <textarea id="feedbackText" name="feedbackText" class="form-textarea"
+                                  placeholder="What do you love? What could be better? Any features you'd like to see? We genuinely want to hear from you!"
+                                  rows="5" required></textarea>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="feedback-submit-btn">
+                            <span class="btn-icon">✉️</span>
+                            <span class="btn-text">Send Feedback</span>
+                        </button>
+                    </div>
+
+                    <!-- Success/Error Messages -->
+                    <div class="feedback-message feedback-message--success" id="feedbackSuccess" style="display: none;">
+                        <strong>🎉 Thank you, friend!</strong> Your feedback has been sent. We'll read it carefully and get back to you soon!
+                    </div>
+                    <div class="feedback-message feedback-message--error" id="feedbackError" style="display: none;">
+                        <strong>😔 Oops!</strong> Something went wrong. Please try again or email us directly at patrick@poli-international.com
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         EMBED MODAL
+    ═══════════════════════════════════════════════════════════ -->
+    <div id="embed-modal" class="coverage__modal" style="display: none;">
+        
+        <div class="coverage__modal-content">
+            <button class="coverage__modal-close" aria-label="Close modal">&times;</button>
+
+            <h2 class="coverage__modal-title">🎁 Use This Tool FREE on Your Website!</h2>
+            <p class="coverage__modal-subtitle">Embed the Coverage Calculator on your site with one line of code</p>
+
+            <!-- Embed Code Section -->
+            <div class="coverage__modal-section">
+                <h3 class="coverage__modal-section-title">Embed Code</h3>
+                <div class="coverage__code-block">
+                    <code id="embed-code">&lt;iframe src="https://poliinternational.com/tools/coverage-calculator/embed.html" width="100%" height="800" frameborder="0"&gt;&lt;/iframe&gt;</code>
+                </div>
+                <button id="copy-embed-code" class="coverage__copy-button">
+                    📋 Copy Code
+                </button>
+                <p id="copy-success" class="coverage__copy-success" style="display: none;">✅ Copied to clipboard!</p>
+            </div>
+
+            <!-- Download & Traffic Buttons -->
+            <div class="coverage__modal-actions">
+                <a href="embed.html" download class="coverage__modal-button coverage__modal-button--download">
+                    ⬇️ Download HTML File
+                </a>
+                <a href="https://poliinternational.com/tools" class="coverage__modal-button coverage__modal-button--tools">
+                    🔗 More Free Tools
+                </a>
+            </div>
+
+            <!-- Email Capture (Modal Location) -->
+            <div class="coverage__modal-section coverage__modal-email">
+                <h3 class="coverage__modal-section-title">🔔 Get Notified of New Tools!</h3>
+                <form id="modal-email-form" class="coverage__email-form" data-location="modal">
+                    <div class="coverage__email-input-group">
+                        <input type="email"
+                               id="modal-email-input"
+                               class="coverage__email-input"
+                               placeholder="Your email address"
+                               required
+                               aria-label="Email address">
+                        <button type="submit" class="coverage__email-submit">Subscribe</button>
+                    </div>
+                    <p class="coverage__email-success" id="modal-email-success" style="display: none;">
+                        ✅ Thanks! We'll notify you when new tools launch!
+                    </p>
+                    <p class="coverage__email-error" id="modal-email-error" style="display: none;">
+                        ❌ Please enter a valid email address.
+                    </p>
+                </form>
+            </div>
+
+            <!-- Ko-fi Support (Modal Location) -->
+            <div class="coverage__modal-section coverage__modal-kofi">
+                <p class="coverage__modal-kofi-text">☕ Enjoying this free tool? Support more development!</p>
+                <a href='https://ko-fi.com/C0C81NEXBV' target='_blank' class="coverage__kofi coverage__kofi--modal">
+                    <img src='https://storage.ko-fi.com/cdn/kofi6.png?v=6'
+                         border='0'
+                         alt='Buy Me a Coffee at ko-fi.com'
+                         class="coverage__kofi-img" />
+                </a>
+            </div>
+
+            <!-- Features List -->
+            <div class="coverage__modal-section">
+                <h3 class="coverage__modal-section-title">✨ Features</h3>
+                <ul class="coverage__modal-features">
+                    <li>✅ Professional coverage area calculator</li>
+                    <li>✅ Realistic session time estimates</li>
+                    <li>✅ Ink consumption calculator</li>
+                    <li>✅ Pricing guidance tool</li>
+                    <li>✅ Body location difficulty modifiers</li>
+                    <li>✅ Mobile-responsive design</li>
+                    <li>✅ Dark/light mode</li>
+                    <li>✅ 100% free, no ads</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/calculator.js"></script>
+    <script src="js/feedback.js"></script>
+
+    <!-- Hide header when embedded in iframe -->
+    <script>
+        // Detect if page is loaded in iframe and hide header
+        if (window.self !== window.top) {
+            document.addEventListener('DOMContentLoaded', function() {
+                var header = document.querySelector('.site-header');
+                if (header) {
+                    header.style.display = 'none';
+                }
+                // Also hide tool title section if present
+                var toolTitle = document.querySelector('.tool-title-section');
+                if (toolTitle) {
+                    toolTitle.style.display = 'none';
+                }
+            });
+        }
+    </script>
+
+<!-- AUTOMATIC IFRAME CONTENT HIDER (ADDED BY ANTIGRAVITY) -->
+<script>
+    if (window.self !== window.top) {
+        document.addEventListener('DOMContentLoaded', function() {
+            const selectors = ['.breadcrumb-nav', '.site-header', '.site-footer', '.equip-checker__header', 
+                '.equip-checker__footer', '.tool-title-section', '.more-tools-section',
+                '.feedback-section', '.related-tools-section', '.geo-summary-block',
+                '.needle-selector__header', '.needle-selector__footer', 
+                '.needle-selector__more-tools', '.community-feedback',
+                '.poli-footer', '.share-card', '.need-support-card', '.explore-all-card'];
+            selectors.forEach(selector => {
+                const elements = document.querySelectorAll(selector);
+                elements.forEach(el => el.style.display = 'none');
+            });
+            // Force reset body margins for embed
+            document.body.style.paddingTop = '0';
+            document.body.style.marginTop = '0';
+            document.body.style.paddingBottom = '0';
+            document.body.style.marginBottom = '0';
+            
+            
+/* Center align tool headers when in iframe */
+if (window.self !== window.top) {
+    const style = document.createElement('style');
+    style.textContent = `
+        /* Center the entire header section */
+        [class*="__header-content"],
+        [class*="__title-group"],
+        [class*="__header-buttons"] {
+            text-align: center !important;
+            justify-content: center !important;
+            align-items: center !important;
+        }
+
+        /* Center H2 headings */
+        [class*="__header"] h2,
+        [class*="__title-group"] h2,
+        header h2 {
+            text-align: center !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+        }
+
+        /* Center subtitles/descriptions */
+        [class*="__subtitle"],
+        [class*="__header"] p {
+            text-align: center !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+        }
+
+        /* Center button containers */
+        [class*="__header-buttons"] {
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            flex-wrap: wrap !important;
+        }
+    `;
+    document.head.appendChild(style);
+}
+        });
+    }
+</script>
+
+</body>
+</html>
