@@ -610,26 +610,37 @@
     <div class="embed__container">
         <!-- Header -->
         <header class="embed__header">
-            <h1 class="embed__title">Needle Coverage Calculator</h1>
-            <a href='https://ko-fi.com/C0C81NEXBV' target='_blank' class="embed__kofi-button">
-                <span class="kofi-icon">☕</span>
-                <span class="kofi-text">Buy Me a Coffee</span>
-            </a>
-            <button id="theme-toggle" class="embed__theme-toggle" aria-label="Toggle theme">◐</button>
+            <h1 class="embed__title" data-i18n="embed_title">Needle Coverage Calculator</h1>
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                <select id="embed-language-select" aria-label="Select Language" onchange="window.I18N && window.I18N.setLanguage(this.value)" style="background: rgba(0,0,0,0.4); color: #fff; border: 1px solid #2C5F7C; font-size: 0.8rem; font-weight: 600; padding: 4px 6px; border-radius: 6px; cursor: pointer;">
+                    <option value="en">🇬🇧 EN</option>
+                    <option value="fr">🇫🇷 FR</option>
+                    <option value="it">🇮🇹 IT</option>
+                    <option value="de">🇩🇪 DE</option>
+                    <option value="es">🇪🇸 ES</option>
+                    <option value="nl">🇳🇱 NL</option>
+                    <option value="pt">🇵🇹 PT</option>
+                </select>
+                <a href='https://ko-fi.com/C0C81NEXBV' target='_blank' class="embed__kofi-button">
+                    <span class="kofi-icon">☕</span>
+                    <span class="kofi-text" data-i18n="btn_kofi">Buy Me a Coffee</span>
+                </a>
+                <button id="theme-toggle" class="embed__theme-toggle" aria-label="Toggle theme">◐</button>
+            </div>
         </header>
 
         <!-- Tab Navigation -->
         <nav class="embed__tabs" role="tablist">
-            <button class="embed__tab embed__tab--active" data-tab="coverage" role="tab" aria-selected="true">
+            <button class="embed__tab embed__tab--active" data-tab="coverage" role="tab" aria-selected="true" data-i18n="tab_coverage">
                 📏 Coverage
             </button>
-            <button class="embed__tab" data-tab="session" role="tab" aria-selected="false">
+            <button class="embed__tab" data-tab="session" role="tab" aria-selected="false" data-i18n="tab_session">
                 ⏱️ Session
             </button>
-            <button class="embed__tab" data-tab="ink" role="tab" aria-selected="false">
+            <button class="embed__tab" data-tab="ink" role="tab" aria-selected="false" data-i18n="tab_ink">
                 💧 Ink
             </button>
-            <button class="embed__tab" data-tab="pricing" role="tab" aria-selected="false">
+            <button class="embed__tab" data-tab="pricing" role="tab" aria-selected="false" data-i18n="tab_pricing">
                 💰 Pricing
             </button>
         </nav>
@@ -1021,11 +1032,13 @@
             document.body.classList.add('light-mode');
         }
 
-        themeToggle.addEventListener('click', function() {
-            document.body.classList.toggle('light-mode');
-            const isLight = document.body.classList.contains('light-mode');
-            localStorage.setItem('coverage-embed-theme', isLight ? 'light' : 'dark');
-        });
+        if (themeToggle) {
+            themeToggle.addEventListener('click', function() {
+                document.body.classList.toggle('light-mode');
+                const isLight = document.body.classList.contains('light-mode');
+                localStorage.setItem('coverage-embed-theme', isLight ? 'light' : 'dark');
+            });
+        }
 
         // Tab Navigation
         const tabs = document.querySelectorAll('.embed__tab');
@@ -1048,7 +1061,9 @@
         });
 
         // Coverage Calculator
-        document.getElementById('coverage-form').addEventListener('submit', function(e) {
+        const coverageFormEmbed = document.getElementById('coverage-form');
+        if (coverageFormEmbed) {
+            coverageFormEmbed.addEventListener('submit', function(e) {
             e.preventDefault();
 
             const needleConfig = document.getElementById('needle-config').value;
@@ -1102,7 +1117,9 @@
         });
 
         // Session Time Estimator
-        document.getElementById('session-form').addEventListener('submit', function(e) {
+        const sessionFormEmbed = document.getElementById('session-form');
+        if (sessionFormEmbed) {
+            sessionFormEmbed.addEventListener('submit', function(e) {
             e.preventDefault();
 
             const width = parseFloat(document.getElementById('tattoo-width').value);
@@ -1171,7 +1188,9 @@
         });
 
         // Ink Calculator
-        document.getElementById('ink-form').addEventListener('submit', function(e) {
+        const inkFormEmbed = document.getElementById('ink-form');
+        if (inkFormEmbed) {
+            inkFormEmbed.addEventListener('submit', function(e) {
             e.preventDefault();
 
             const width = parseFloat(document.getElementById('ink-width').value);
@@ -1226,7 +1245,9 @@
         });
 
         // Pricing Calculator
-        document.getElementById('pricing-form').addEventListener('submit', function(e) {
+        const pricingFormEmbed = document.getElementById('pricing-form');
+        if (pricingFormEmbed) {
+            pricingFormEmbed.addEventListener('submit', function(e) {
             e.preventDefault();
 
             const hours = parseFloat(document.getElementById('estimated-hours').value);
@@ -1279,5 +1300,6 @@
             `;
         });
     </script>
+    <script src="js/i18n.js"></script>
 </body>
 </html>
