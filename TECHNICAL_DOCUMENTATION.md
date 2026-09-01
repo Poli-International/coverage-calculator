@@ -1,21 +1,41 @@
 # Coverage Calculator - Technical Documentation
 
-**Version:** 1.0.0
-**Last Updated:** January 2025
-**Maintainer:** Poli International Co.
+**Version:** 2.3.0  
+**Last Updated:** 2026  
+**Maintainer:** Poli International Co.  
+**Supported Languages (7):** `[🇬🇧 English] • [🇫🇷 Français] • [🇮🇹 Italiano] • [🇩🇪 Deutsch] • [🇪🇸 Español] • [🇳🇱 Nederlands] • [🇵🇹 Português]`
+
+---
+
+## 🌐 Multilingual Technical Summary / Résumé Technique Multilingue / Riepilogo Tecnico Multilingue / Mehrsprachige Technische Zusammenfassung / Resumen Técnico Multilingüe / Meertalige Technische Samenvatting / Resumo Técnico Multilíngue
+
+| Language | Module Overview & Latest Feature Architecture |
+|---|---|
+| 🇬🇧 **English** | Vanilla ES6+ architecture with dynamic 7-language I18N engine, Chart.js saturation trend curves with 35%/65% clinical threshold lines & baseline deviation alerts, multi-session master planning engine with batch aggregation, and certified client PDF consultation reports with signature blocks. |
+| 🇫🇷 **Français** | Architecture modulaire JavaScript sans dépendance lourde, moteur de traduction DOM à 7 langues, analyse de saturation Chart.js avec seuils cliniques (35%/65%) et alertes de déviation, planificateur de projets multi-séances par lot et rapports techniques PDF certifiés avec blocs de signature. |
+| 🇮🇹 **Italiano** | Architettura frontend modulare in puro JavaScript, motore I18N a 7 lingue, grafici di tendenza della saturazione Chart.js con soglie cliniche (35%/65%) e deviazione dallo standard di studio, modulo di pianificazione multi-seduta e generazione report PDF per clienti con firma. |
+| 🇩🇪 **Deutsch** | Reine JavaScript-Architektur mit integrierter 7-Sprachen-I18N-Engine, interaktiver Chart.js-Sättigungsanalyse inklusive klinischer Schwellenwertlinien (35%/65%) und Studio-Abweichungswarnungen, Mehrfachsitzungs-Projektplaner mit Batch-Aggregation und PDF-Kundenprotokollen mit Unterschriftsfeldern. |
+| 🇪🇸 **Español** | Arquitectura en JavaScript vanilla con motor I18N para 7 idiomas, analítica de curvas de saturación en Chart.js con líneas de umbral clínico (35%/65%) y alertas de desviación del estudio, planificador de proyectos multi-sesión con selección por lotes y reportes de consulta en PDF con firmas. |
+| 🇳🇱 **Nederlands** | Modulaire vanilla JavaScript-architectuur met 7-talige I18N-engine, interactieve Chart.js verzadigingstrendanalyse met klinische drempellijnen (35%/65%) en afwijkingswaarschuwingen, projectplanner voor meerdere sessies met batchaggregatie en gecertificeerde PDF-klantspecificaties met handtekeningblokken. |
+| 🇵🇹 **Português** | Arquitetura em JavaScript puro com motor I18N em 7 idiomas, análise de saturação com Chart.js com limites clínicos (35%/65%) e alertas de desvio de bancada, planejador de projetos multi-sessão com agregação em lote e emissão de laudos técnicos em PDF com assinatura. |
 
 ---
 
 ## Table of Contents
 
 1. [Architecture Overview](#architecture-overview)
-2. [Database Schemas](#database-schemas)
-3. [Calculation Algorithms](#calculation-algorithms)
-4. [API Reference](#api-reference)
-5. [Integration Guide](#integration-guide)
-6. [Customization Options](#customization-options)
-7. [Performance Optimization](#performance-optimization)
-8. [Testing & Validation](#testing--validation)
+2. [Global Multilanguage Engine (I18N)](#global-multilanguage-engine-i18n)
+3. [Database Schemas](#database-schemas)
+4. [Calculation Algorithms](#calculation-algorithms)
+5. [Advanced Analytics & Chart.js Engine](#advanced-analytics--chartjs-engine)
+6. [Multi-Session Project Master Planning Engine](#multi-session-project-master-planning-engine)
+7. [Certified Client PDF Documentation Generator](#certified-client-pdf-documentation-generator)
+8. [API Reference](#api-reference)
+9. [Integration Guide](#integration-guide)
+10. [Customization Options](#customization-options)
+11. [Performance Optimization](#performance-optimization)
+12. [Testing & Validation](#testing--validation)
+13. [Version History](#version-history)
 
 ---
 
@@ -25,33 +45,58 @@
 
 **Frontend:**
 - Pure JavaScript (ES6+)
-- CSS3 with Custom Properties
-- HTML5 with semantic elements
-- No external dependencies
+- Global I18N Translation Engine (`/js/i18n.js`) with 7-language support
+- CSS3 with Custom Properties and Theme Switching
+- Semantic HTML5 with `data-i18n` attribute binding
+- No heavy frameworks or build dependencies needed
 
-**Storage:**
-- localStorage for theme persistence
-- No backend required
-- Client-side only calculations
+**Storage & Persistence:**
+- `localStorage` for theme (`coverage-app-theme`), unit preference (`coverage-calculator-unit`), history, and language persistence (`coverage-app-lang`).
+- Client-side only calculation engine.
 
 **Compatibility:**
-- ES6+ browsers (Chrome 51+, Firefox 54+, Safari 10+, Edge 15+)
-- Progressive enhancement for older browsers
-- Mobile-responsive (320px minimum width)
+- ES6+ browsers (Chrome, Firefox, Safari, Edge, mobile browsers)
+- Fully responsive (320px to 4K ultra-wide)
 
 ### File Structure
 
 ```
 coverage-calculator/
-├── index.html              # Main standalone application
+├── index.html              # Main standalone application with 7-lang switcher
 ├── embed.html              # Embeddable widget version
 ├── css/
-│   └── style.css          # Complete styling (1,059 lines)
+│   └── style.css          # Core CSS stylesheet
 ├── js/
-│   └── calculator.js      # Core logic and databases
-└── assets/
-    └── images/            # Logo and graphics
+│   ├── i18n.js            # 7-Language Internationalization engine & dictionary
+│   ├── calculator.js      # Core calculation algorithms & databases
+│   └── feedback.js        # Feedback widget
+└── images/                # Logos and vector assets
 ```
+
+---
+
+## Global Multilanguage Engine (I18N)
+
+The application incorporates a lightweight, dependency-free internationalization system exposed on `window.I18N`.
+
+### Supported Locales:
+- `en`: 🇬🇧 English (Default)
+- `fr`: 🇫🇷 Français
+- `it`: 🇮🇹 Italiano
+- `de`: 🇩🇪 Deutsch
+- `es`: 🇪🇸 Español
+- `nl`: 🇳🇱 Nederlands
+- `pt`: 🇵🇹 Português
+
+### Mechanism:
+1. **HTML Attribute Binding**: Elements declare translations using:
+   - `data-i18n="key"`: Replaces `textContent` or `innerHTML`.
+   - `data-i18n-placeholder="key"`: Translates input/search placeholders.
+   - `data-i18n-title="key"`: Translates tooltips and title tags.
+   - `data-i18n-aria="key"`: Translates accessibility `aria-label`s.
+2. **Dynamic Key Resolution**: Code queries translations via `window.I18N.t('key')` or `I18N.getTranslation(key, lang)`.
+3. **Event Dispatching**: Emits `languageChanged` event with `{ language }` payload so charts, converters, and dynamic widgets re-render instantly.
+4. **Persistence**: Automatically syncs with `localStorage['coverage-app-lang']` and detects system browser language.
 
 ### Component Architecture
 
@@ -452,6 +497,113 @@ perSessionMax = maxPrice / sessions
   }
 }
 ```
+
+---
+
+## Advanced Analytics & Chart.js Engine
+
+### Saturation Trend Progression Architecture
+
+The application implements a responsive Chart.js line chart rendered in `#saturation-trend-line-chart` that tracks ink saturation trends across calculation iterations.
+
+#### Clinical Threshold Datasets
+The chart renders three reference threshold levels alongside the primary session progression curve:
+1. **Light Saturation / Fine Line Benchmark (35%)**: Dashed emerald line (`#10b981`) indicating delicate low-trauma linework with minimal dermal dwell.
+2. **Heavy Solid Saturation Benchmark (65%)**: Dashed neon pink line (`#ff006e`) indicating dense pigment packing requiring careful pass control and extended recovery.
+3. **Studio Historical Mean Baseline**: Dashed amber line (`#f59e0b`) dynamically computed from the rolling average of stored calculation records.
+
+#### Data Schema & Point Hover Tooltip
+```javascript
+{
+  labels: ['#1 (1RL)', '#2 (9M1)', ...],
+  datasets: [
+    {
+      label: 'Session Saturation (%)',
+      data: [18, 54, 82, ...],
+      borderColor: '#ff006e',
+      backgroundColor: 'rgba(255, 0, 110, 0.12)',
+      pointHoverRadius: 7,
+      pointRadius: 4,
+      fill: true
+    },
+    { label: 'Heavy Saturation (65%)', data: [65, 65, ...], borderDash: [5, 4] },
+    { label: 'Studio Baseline', data: [mean, mean, ...], borderDash: [3, 3] },
+    { label: 'Light Saturation (35%)', data: [35, 35, ...], borderDash: [5, 4] }
+  ]
+}
+```
+
+#### Deviation Detection & Real-time Warning Logic
+```javascript
+const studioAvg = history.reduce((acc, h) => acc + h.saturationPercent, 0) / history.length;
+const currentSat = currentCalc.saturationPercent;
+const delta = currentSat - studioAvg;
+
+if (Math.abs(delta) >= 20) {
+  const isHigh = delta > 0;
+  // Triggers dynamic warning badge and clinical advisory alert
+  alertBadge.textContent = isHigh ? `+${Math.round(delta)}% Above Studio Avg` : `-${Math.round(Math.abs(delta))}% Below Studio Avg`;
+  alertBanner.innerHTML = `⚠️ <strong>High Saturation Variance</strong>: Current configuration (${currentSat}%) differs from your studio baseline (${Math.round(studioAvg)}%). Review pass counts and stretch technique.`;
+}
+```
+
+---
+
+## Multi-Session Project Master Planning Engine
+
+### Architecture & Data Aggregation
+The multi-session planner allows tattoo artists and clients to select multiple historical calculation records using checkboxes to generate unified project specifications for large-scale tattoo works (sleeves, backpieces, multi-pass realism).
+
+#### Aggregation Formulas:
+```javascript
+// Cumulative Surface Area
+totalProjectAreaSqin = selectedRecords.reduce((sum, r) => sum + r.areaSqin, 0);
+totalProjectAreaSqcm = totalProjectAreaSqin * 6.4516;
+
+// Cumulative Chair Time
+totalProjectHours = selectedRecords.reduce((sum, r) => sum + r.estHours, 0);
+totalProjectMins = Math.round(totalProjectHours * 60);
+
+// Volumetric Pigment Aggregation
+totalNetMl = selectedRecords.reduce((sum, r) => sum + r.netMl, 0);
+totalGrossMl = selectedRecords.reduce((sum, r) => sum + r.grossMl, 0);
+totalCaps = Math.max(1, Math.ceil(totalGrossMl / 1.5));
+totalGrossFloz = totalGrossMl * 0.033814;
+
+// Financial Estimate
+hourlyRate = userHourlyRate || 150;
+projectMinQuote = totalProjectHours * hourlyRate;
+projectTargetQuote = projectMinQuote * 1.2;
+recommendedDeposit = projectTargetQuote * 0.25;
+```
+
+#### Clinical Staging & Healing Protocol
+- **Interval Recommendation**: 14–21 calendar days between trauma passes on identical tissue zones.
+- **Stage Progression**: Session 1 (Structural Linework & Outlines) → Session 2 (Primary Dark Core Shading) → Session 3 (Color Packing & Soft Feathering) → Session 4 (High-Trauma Solid Blacks & White Highlights).
+- **Bio-Buffer Allowance**: +15% chair buffer for pain resets, skin stretching relief, and dermal redness reduction.
+
+#### Multi-Format Export Endpoints:
+- **`exportSelectedRecordsCSV()`**: Generates tabular CSV file of selected sessions.
+- **`copyMultiSessionMarkdownPlan()`**: Copies formatted Markdown summary table to system clipboard.
+- **`generateMultiSessionMasterPDF()`**: Builds multi-page client and studio master project summary PDF.
+
+---
+
+## Certified Client PDF Documentation Generator
+
+### Engine & jsPDF Vector Layout
+Built on `window.jspdf.jsPDF`, generating a high-resolution A4 vector document (`210mm × 297mm`) suitable for professional studio archives and client consultations.
+
+#### Document Architecture:
+1. **Header Branding Bar**: Slate-900 background (`rgb(15, 23, 42)`) with Poli neon-pink accent underline (`#ff006e`), studio seal, and unique document tracking reference ID (`POLI-DOC-XXXXXX`).
+2. **Session Parameters & Needle Configuration Panel**: Two-column layout documenting needle type, speed, target skin area (dual `sq in` and `cm²`), estimated duration in hours/minutes, ink density rating, and unit deposition volume.
+3. **Volumetric Dispensing & Reservoir Loss Table**: Itemized breakdown of Net Dermal Pigment, Cartridge Reservoir Overhead (+14% to +26% friction buffer), Gross Setup Volume (mL & fl oz), and 1.5 mL ink cap counts.
+4. **Clinical Healing & Trauma Profile**:
+   - Trauma Index rating (1.0 to 5.0 scale)
+   - Needle dwell profile (Superficial vs. Mid-Dermis vs. Multi-Pass Deep Dermal)
+   - Estimated epidermal re-epithelialization timeline (7–10 days, 12–16 days, or 18–25+ days)
+   - SecondSkin / breathable barrier film aftercare specifications
+5. **Artist & Client Sign-Off Block**: Verification disclaimer and physical dual-signature lines for studio liability and informed consent.
 
 ---
 
@@ -999,19 +1151,33 @@ function escapeHtml(unsafe) {
 
 ## Version History
 
-### 1.0.0 - January 2025
+### 2.4.0 - 2026
+- **Google Calendar & .ICS Event Export Engine**: Direct appointment scheduling modal with pre-populated session estimates, client tags, needle configuration notes, and downloadable `.ics` iCalendar calendar files.
+- **Ink Needle & Pass Optimization Suggestion System**: Algorithmic suggestion module that analyzes ink calculations to recommend broader magnum needle groupings and pass reductions, calculating saved pigment volume and reduced ink cap waste without compromising tattoo quality.
+- **Inventory Stock Depletion & Predictive Reorder Forecast**: 30-day forecast engine tracking scheduled client sessions against ink bottle stock, automatic safety buffer alerts, and 1-click supplier order manifests.
+- **Ink Waste vs. Dermal Consumption Telemetry**: Interactive multi-month bar chart and pigment line waste ratio matrix for comparing actual dermally deposited ink vs in-cap residue and cartridge discard.
+- **Automated Browser Language Detection & Full Localization**: Automated `navigator.languages` detection with fallback handling, `localStorage` persistence, and 100% UI localization coverage across English, French, Italian, German, Spanish, Dutch, and Portuguese.
 
+### 2.3.0 - 2026
+- **Chart.js Saturation Trend Line Chart & Clinical Thresholds**: Dynamic analytics curve tracking calculation records with 35% (Light) and 65% (Heavy) clinical reference thresholds, rolling studio historical baseline, and instant high/low saturation deviation alerts.
+- **Multi-Session Master Planning Engine**: Batch selection of historical records, combined project calculations (total area, total chair hours/minutes, total pigment volume in mL/fl oz/caps), financial forecasting, and 14–21 day clinical recovery scheduling with multi-session PDF/CSV exports.
+- **Certified Client PDF Documentation Generator**: High-resolution A4 technical specification and consultation sheets with studio branding header seals, itemized volumetric waste calculations, trauma index profiling, aftercare regimens, and dual artist/client signature blocks.
+- **Enhanced 7-Language Global Localization**: Complete multilingual UI coverage across English, French, Italian, German, Spanish, Dutch, and Portuguese.
+
+### 2.2.0 - 2025
+- Real-time unit toggle (`sq in` ↔ `cm²`) with automatic input synchronization across all tools.
+- Volumetric saturation bar and sparkline history curve with interactive tooltips.
+- Onboarding guided tour and needle size visual diagrams.
+
+### 2.1.0 - 2025
+- Global 7-language I18N translation engine with DOM attribute bindings.
+- Extended needle configurations and categorized optgroups.
+
+### 1.0.0 - January 2025
 **Initial Release:**
-- Coverage Area Calculator
-- Session Time Estimator
-- Ink Consumption Calculator
-- Pricing Calculator
-- 18 needle configurations
-- 15 body locations
-- Dark/Light theme toggle
-- Mobile responsive design
-- WordPress integration
-- Gutenberg block
+- Coverage Area Calculator, Session Time Estimator, Ink Consumption Calculator, Pricing Calculator
+- 18 needle configurations, 15 body locations
+- Dark/Light theme toggle, mobile responsive design, WordPress integration
 
 ---
 
