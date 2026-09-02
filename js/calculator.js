@@ -1,3 +1,26 @@
+
+// A sentence with computed values in it. The key carries positional holes so
+// each language can put the numbers where its own grammar wants them; a hole a
+// translation omits is simply dropped.
+//
+// THE GLOBAL IS NOT THE SAME IN EVERY TOOL. The coverage calculator exposes
+// window.I18N; the form builder exposes window.i18n. Hardcoding I18N made all
+// nineteen calls in the form builder fall back to English, silently, in all six
+// languages, because a fallback that works is exactly what hides a lookup that
+// does not.
+function TP(key, fallback) {
+  var vals = Array.prototype.slice.call(arguments, 2);
+  var api = (typeof window !== 'undefined' && ((window.I18N && window.I18N.t && window.I18N) || (window.i18n && window.i18n.t && window.i18n))) || null;
+  var s = api ? api.t(key, fallback) : fallback;
+  if (s === undefined || s === null || s === key) s = fallback;
+  return String(s).replace(/\{(\d+)\}/g, function (m, i) { return vals[Number(i)] === undefined ? '' : vals[Number(i)]; });
+}
+
+// Runtime strings go through the dictionary too. The fallback is the English, so
+// the tool still reads correctly if i18n.js has not loaded or a key is missing.
+function T(key, fallback) {
+  return (window.I18N && typeof window.I18N.t === 'function') ? window.I18N.t(key, fallback) : fallback;
+}
 /* ═══════════════════════════════════════════════════════════
    PROFESSIONAL NEEDLE COVERAGE CALCULATOR
    Complex Databases & Calculation Engine
@@ -661,7 +684,7 @@ function setGlobalUnit(newUnit, convertValues = true) {
 
     // 1. Session Time Form Labels & Values
     const widthLabel = document.querySelector('label[for="tattoo-width"] .coverage__label-text');
-    if (widthLabel) widthLabel.textContent = isMetric ? 'Width (cm)' : 'Width (inches)';
+    if (widthLabel) widthLabel.textContent = isMetric ? T("x.width_cm", "Width (cm)") : T("x.width_inches", "Width (inches)");
     const widthInput = document.getElementById('tattoo-width');
     if (widthInput) {
         widthInput.placeholder = isMetric ? 'e.g., 15' : 'e.g., 6';
@@ -672,7 +695,7 @@ function setGlobalUnit(newUnit, convertValues = true) {
     }
 
     const heightLabel = document.querySelector('label[for="tattoo-height"] .coverage__label-text');
-    if (heightLabel) heightLabel.textContent = isMetric ? 'Height (cm)' : 'Height (inches)';
+    if (heightLabel) heightLabel.textContent = isMetric ? T("x.height_cm", "Height (cm)") : T("x.height_inches", "Height (inches)");
     const heightInput = document.getElementById('tattoo-height');
     if (heightInput) {
         heightInput.placeholder = isMetric ? 'e.g., 20' : 'e.g., 8';
@@ -684,7 +707,7 @@ function setGlobalUnit(newUnit, convertValues = true) {
 
     // 2. Ink Consumption Form
     const inkAreaLabel = document.querySelector('label[for="ink-area"] .coverage__label-text');
-    if (inkAreaLabel) inkAreaLabel.textContent = isMetric ? 'Coverage Area (cm²)' : 'Coverage Area (sq in)';
+    if (inkAreaLabel) inkAreaLabel.textContent = isMetric ? T("x.coverage_area_cm", "Coverage Area (cm²)") : T("x.coverage_area_sq_in", "Coverage Area (sq in)");
     const inkAreaInput = document.getElementById('ink-area');
     if (inkAreaInput) {
         inkAreaInput.placeholder = isMetric ? 'e.g., 310' : 'e.g., 48';
@@ -696,7 +719,7 @@ function setGlobalUnit(newUnit, convertValues = true) {
 
     // 3. Pricing Form
     const pricingAreaLabel = document.querySelector('label[for="pricing-area"] .coverage__label-text');
-    if (pricingAreaLabel) pricingAreaLabel.textContent = isMetric ? 'Total Area (cm²)' : 'Total Area (sq in)';
+    if (pricingAreaLabel) pricingAreaLabel.textContent = isMetric ? T("x.total_area_cm", "Total Area (cm²)") : T("x.total_area_sq_in", "Total Area (sq in)");
     const pricingAreaInput = document.getElementById('pricing-area');
     if (pricingAreaInput) {
         pricingAreaInput.placeholder = isMetric ? 'e.g., 310' : 'e.g., 48';
@@ -713,14 +736,14 @@ function setGlobalUnit(newUnit, convertValues = true) {
         if (parentCard) {
             const cardLabel = parentCard.querySelector('.coverage__result-label');
             const cardSublabel = parentCard.querySelector('.coverage__result-sublabel');
-            if (cardLabel) cardLabel.textContent = isMetric ? 'Per Sq Centimeter' : 'Per Sq Inch';
-            if (cardSublabel) cardSublabel.textContent = isMetric ? 'Unit pricing ($/cm²)' : 'Unit pricing ($/sq in)';
+            if (cardLabel) cardLabel.textContent = isMetric ? T("x.per_sq_centimeter", "Per Sq Centimeter") : T("x.per_sq_inch", "Per Sq Inch");
+            if (cardSublabel) cardSublabel.textContent = isMetric ? T("x.unit_pricing_cm", "Unit pricing ($/cm²)") : T("x.unit_pricing_sq_in", "Unit pricing ($/sq in)");
         }
     }
 
     // 4. Ink Inventory Planner
     const apptAreaLabel = document.querySelector('label[for="appt-area"] .coverage__label-text');
-    if (apptAreaLabel) apptAreaLabel.textContent = isMetric ? 'Skin Area (cm²)' : 'Skin Area (sq in)';
+    if (apptAreaLabel) apptAreaLabel.textContent = isMetric ? T("x.skin_area_cm", "Skin Area (cm²)") : T("x.skin_area_sq_in", "Skin Area (sq in)");
     const apptAreaInput = document.getElementById('appt-area');
     if (apptAreaInput) {
         if (convertValues && apptAreaInput.value && !isNaN(parseFloat(apptAreaInput.value))) {
@@ -1151,7 +1174,7 @@ function displayCoverageResults(data) {
 
     // Set status badge
     const statusBadge = document.getElementById('coverage-status');
-    statusBadge.textContent = '✓ Calculation Complete';
+    statusBadge.textContent = T("x.calculation_complete", "✓ Calculation Complete");
     statusBadge.className = 'coverage__status-badge coverage__status-badge--optimal';
 
     // Create comparison (A-paper sizes + credit card)
@@ -1339,13 +1362,13 @@ function displaySessionResults(data) {
     // Set status badge
     const statusBadge = document.getElementById('session-status');
     if (data.status === 'optimal') {
-        statusBadge.textContent = '✓ Achievable Timeline';
+        statusBadge.textContent = T("x.achievable_timeline", "✓ Achievable Timeline");
         statusBadge.className = 'coverage__status-badge coverage__status-badge--optimal';
     } else if (data.status === 'ambitious') {
-        statusBadge.textContent = '⚠ Ambitious Project';
+        statusBadge.textContent = T("x.ambitious_project", "⚠ Ambitious Project");
         statusBadge.className = 'coverage__status-badge coverage__status-badge--ambitious';
     } else {
-        statusBadge.textContent = '⚠️ Adjust Expectations';
+        statusBadge.textContent = T("x.adjust_expectations", "⚠️ Adjust Expectations");
         statusBadge.className = 'coverage__status-badge coverage__status-badge--unrealistic';
     }
 
@@ -1789,13 +1812,13 @@ function displayPricingResults(data) {
     // Set status badge
     const statusBadge = document.getElementById('pricing-status');
     if (data.status === 'underpriced') {
-        statusBadge.textContent = '⚠ Consider Increasing';
+        statusBadge.textContent = T("badge_underpriced", "⚠ Consider Increasing");
         statusBadge.className = 'coverage__status-badge coverage__status-badge--ambitious';
     } else if (data.status === 'premium') {
-        statusBadge.textContent = '✓ Premium Pricing';
+        statusBadge.textContent = T("badge_premium", "✓ Premium Pricing");
         statusBadge.className = 'coverage__status-badge coverage__status-badge--optimal';
     } else {
-        statusBadge.textContent = '✓ Market Rate';
+        statusBadge.textContent = T("badge_market_rate", "✓ Market Rate");
         statusBadge.className = 'coverage__status-badge coverage__status-badge--optimal';
     }
 
@@ -2084,7 +2107,7 @@ function renderRecentCalculations() {
         if (!validIds.has(id)) selectedRecentCalcIds.delete(id);
     });
 
-    if (badgeEl) badgeEl.textContent = `${records.length} saved`;
+    if (badgeEl) badgeEl.textContent = TP("x.saved", "{0} saved", records.length);
     if (clearBtn) clearBtn.style.display = records.length > 0 ? 'inline-block' : 'none';
     if (exportCsvBtn) exportCsvBtn.style.display = records.length > 0 ? 'inline-block' : 'none';
 
@@ -2319,7 +2342,7 @@ function openMultiSessionPlanningModal() {
 
     // Update item count badge
     if (itemCountBadge) {
-        itemCountBadge.textContent = `${sessionCount} Session${sessionCount > 1 ? 's' : ''} Selected`;
+        itemCountBadge.textContent = TP("x.session_selected", "{0} Session{1} Selected", sessionCount, sessionCount > 1 ? 's' : '');
     }
 
     // Populate Metrics Grid
@@ -2905,22 +2928,22 @@ function initializeUnitConverter() {
         const deviationDiff = currentSat - historicalAvg;
         if (deviationBadge) {
             if (deviationDiff >= 15) {
-                deviationBadge.innerHTML = `⚠️ +${deviationDiff}% vs Studio Avg`;
+                deviationBadge.innerHTML = TP("x.vs_studio_avg", "⚠️ +{0}% vs Studio Avg", deviationDiff);
                 deviationBadge.style.background = 'rgba(255, 0, 110, 0.2)';
                 deviationBadge.style.color = '#ff006e';
                 deviationBadge.style.borderColor = 'rgba(255, 0, 110, 0.4)';
             } else if (deviationDiff <= -15) {
-                deviationBadge.innerHTML = `⚡ ${deviationDiff}% vs Studio Avg`;
+                deviationBadge.innerHTML = TP("x.vs_studio_avg_2", "⚡ {0}% vs Studio Avg", deviationDiff);
                 deviationBadge.style.background = 'rgba(56, 189, 248, 0.2)';
                 deviationBadge.style.color = '#38bdf8';
                 deviationBadge.style.borderColor = 'rgba(56, 189, 248, 0.4)';
             } else if (Math.abs(deviationDiff) >= 8) {
-                deviationBadge.innerHTML = deviationDiff > 0 ? `↗ +${deviationDiff}% vs Avg` : `↘ ${deviationDiff}% vs Avg`;
+                deviationBadge.innerHTML = deviationDiff > 0 ? TP("x.vs_avg_2", "↗ +{0}% vs Avg", deviationDiff) : TP("x.vs_avg", "↘ {0}% vs Avg", deviationDiff);
                 deviationBadge.style.background = 'rgba(251, 191, 36, 0.2)';
                 deviationBadge.style.color = '#fbbf24';
                 deviationBadge.style.borderColor = 'rgba(251, 191, 36, 0.4)';
             } else {
-                deviationBadge.innerHTML = `✓ Studio Baseline (${historicalAvg}%)`;
+                deviationBadge.innerHTML = TP("x.studio_baseline_2", "✓ Studio Baseline ({0}%)", historicalAvg);
                 deviationBadge.style.background = 'rgba(16, 185, 129, 0.18)';
                 deviationBadge.style.color = '#10b981';
                 deviationBadge.style.borderColor = 'rgba(16, 185, 129, 0.3)';
@@ -2934,13 +2957,13 @@ function initializeUnitConverter() {
                 deviationAlert.style.background = 'rgba(255, 0, 110, 0.1)';
                 deviationAlert.style.border = '1px solid rgba(255, 0, 110, 0.3)';
                 deviationAlert.style.color = '#fda4af';
-                deviationAlert.innerHTML = `⚠️ <strong>High Saturation Dwell Deviation (+${deviationDiff}% vs ${historicalAvg}% Studio Average):</strong> Current needle setup delivers dense pigment displacement. Ensure appropriate multi-pass bio-breaks and notify client of extended deep dermal healing timeline.`;
+                deviationAlert.innerHTML = TP("x.high_saturation_dwell_deviation_vs_studio", "⚠️ <strong>High Saturation Dwell Deviation (+{0}% vs {1}% Studio Average):</strong> Current needle setup delivers dense pigment displacement. Ensure appropriate multi-pass bio-breaks and notify client of extended deep dermal healing timeline.", deviationDiff, historicalAvg);
             } else if (deviationDiff <= -15) {
                 deviationAlert.style.display = 'block';
                 deviationAlert.style.background = 'rgba(56, 189, 248, 0.1)';
                 deviationAlert.style.border = '1px solid rgba(56, 189, 248, 0.3)';
                 deviationAlert.style.color = '#bae6fd';
-                deviationAlert.innerHTML = `⚡ <strong>Light Wash / Fine Line Mode (${deviationDiff}% vs ${historicalAvg}% Studio Average):</strong> Minimal pigment deposition with rapid superficial skin recovery (~7–10 days).`;
+                deviationAlert.innerHTML = TP("x.light_wash_fine_line_mode_vs", "⚡ <strong>Light Wash / Fine Line Mode ({0}% vs {1}% Studio Average):</strong> Minimal pigment deposition with rapid superficial skin recovery (~7–10 days).", deviationDiff, historicalAvg);
             } else {
                 deviationAlert.style.display = 'none';
             }
@@ -3081,17 +3104,17 @@ function initializeUnitConverter() {
 
         if (sparklineTrendBadge) {
             if (diff >= 4) {
-                sparklineTrendBadge.innerHTML = `↗ +${diff}% (Increasing)`;
+                sparklineTrendBadge.innerHTML = TP("x.increasing", "↗ +{0}% (Increasing)", diff);
                 sparklineTrendBadge.style.background = 'rgba(255, 0, 110, 0.18)';
                 sparklineTrendBadge.style.color = '#ff006e';
                 sparklineTrendBadge.style.borderColor = 'rgba(255, 0, 110, 0.35)';
             } else if (diff <= -4) {
-                sparklineTrendBadge.innerHTML = `↘ ${diff}% (Decreasing)`;
+                sparklineTrendBadge.innerHTML = TP("x.decreasing", "↘ {0}% (Decreasing)", diff);
                 sparklineTrendBadge.style.background = 'rgba(16, 185, 129, 0.18)';
                 sparklineTrendBadge.style.color = '#10b981';
                 sparklineTrendBadge.style.borderColor = 'rgba(16, 185, 129, 0.35)';
             } else {
-                sparklineTrendBadge.innerHTML = `→ Steady (±0%)`;
+                sparklineTrendBadge.innerHTML = TP("x.steady_0", "→ Steady (±0%)");
                 sparklineTrendBadge.style.background = 'rgba(56, 189, 248, 0.18)';
                 sparklineTrendBadge.style.color = '#38bdf8';
                 sparklineTrendBadge.style.borderColor = 'rgba(56, 189, 248, 0.35)';
@@ -3305,29 +3328,29 @@ function initializeUnitConverter() {
         // Update Expanded Mode Metadata (Healing time, Trauma index, Recommended passes, Aftercare)
         if (healingBadge && healingTimelineText && traumaIndexText && passesRecommendText && aftercareNoteText) {
             if (saturationPercent <= 35) {
-                healingBadge.textContent = 'Est. Healing: ~7–10 days';
+                healingBadge.textContent = T("x.est_healing_7_10_days", "Est. Healing: ~7–10 days");
                 healingBadge.style.background = 'rgba(16, 185, 129, 0.2)';
                 healingBadge.style.color = '#10b981';
-                healingTimelineText.textContent = '7 to 10 days (Rapid epidermal re-epithelialization & mild flaking)';
+                healingTimelineText.textContent = T("x.7_to_10_days_rapid_epidermal", "7 to 10 days (Rapid epidermal re-epithelialization & mild flaking)");
                 traumaIndexText.innerHTML = '<span style="color: #10b981;">Low (1.5 / 5)</span> • Superficial Dermal Dwell';
-                passesRecommendText.textContent = '1–2 single-needle passes with minimal skin distress';
-                aftercareNoteText.textContent = 'Breathable film 2–3 days; light moisturization from day 4 onwards.';
+                passesRecommendText.textContent = T("x.1_2_single_needle_passes_with", "1–2 single-needle passes with minimal skin distress");
+                aftercareNoteText.textContent = T("x.breathable_film_2_3_days_light", "Breathable film 2–3 days; light moisturization from day 4 onwards.");
             } else if (saturationPercent <= 65) {
-                healingBadge.textContent = 'Est. Healing: ~12–16 days';
+                healingBadge.textContent = T("x.est_healing_12_16_days", "Est. Healing: ~12–16 days");
                 healingBadge.style.background = 'rgba(234, 179, 8, 0.2)';
                 healingBadge.style.color = '#fbbf24';
-                healingTimelineText.textContent = '12 to 16 days (Standard full-thickness dermal regeneration & moderate peeling)';
+                healingTimelineText.textContent = T("x.12_to_16_days_standard_full", "12 to 16 days (Standard full-thickness dermal regeneration & moderate peeling)");
                 traumaIndexText.innerHTML = '<span style="color: #eab308;">Moderate (3 / 5)</span> • Mid-Dermis Dwell';
-                passesRecommendText.textContent = '2–3 feathered blend passes';
-                aftercareNoteText.textContent = 'SecondSkin 3–4 days; unscented barrier cream/lotion days 5+.';
+                passesRecommendText.textContent = T("x.2_3_feathered_blend_passes", "2–3 feathered blend passes");
+                aftercareNoteText.textContent = T("x.secondskin_3_4_days_unscented_barrier", "SecondSkin 3–4 days; unscented barrier cream/lotion days 5+.");
             } else {
-                healingBadge.textContent = 'Est. Healing: ~18–25+ days';
+                healingBadge.textContent = T("x.est_healing_18_25_days", "Est. Healing: ~18–25+ days");
                 healingBadge.style.background = 'rgba(239, 68, 68, 0.2)';
                 healingBadge.style.color = '#f87171';
-                healingTimelineText.textContent = '18 to 25+ days (Extended deep dermal remodeling, high inflammation response)';
+                healingTimelineText.textContent = T("x.18_to_25_days_extended_deep", "18 to 25+ days (Extended deep dermal remodeling, high inflammation response)");
                 traumaIndexText.innerHTML = '<span style="color: #ef4444;">Intense (4.8 / 5)</span> • Dense Multi-Pass Trauma';
-                passesRecommendText.textContent = '3–5 circular packing passes with skin stretching';
-                aftercareNoteText.textContent = 'Protective film with exudate check; avoid over-saturating with heavy ointment.';
+                passesRecommendText.textContent = T("x.3_5_circular_packing_passes_with", "3–5 circular packing passes with skin stretching");
+                aftercareNoteText.textContent = T("x.protective_film_with_exudate_check_avoid", "Protective film with exudate check; avoid over-saturating with heavy ointment.");
             }
         }
 
@@ -3346,12 +3369,12 @@ function initializeUnitConverter() {
         // Update Exact Conversion Factor Indicator
         if (factorIndicator) {
             const factorRatio = (mlPerSqin / 0.15).toFixed(2);
-            factorIndicator.innerHTML = `<strong>Applied Factor:</strong> ${factorRatio}x baseline (${mlPerSqin} mL/sq in • ${mlPerSqcm} mL/cm² • ${flozPerSqin} fl oz/sq in)`;
+            factorIndicator.innerHTML = TP("x.applied_factor_x_baseline_ml_sq", "<strong>Applied Factor:</strong> {0}x baseline ({1} mL/sq in • {2} mL/cm² • {3} fl oz/sq in)", factorRatio, mlPerSqin, mlPerSqcm, flozPerSqin);
         }
 
         // Update Dynamic Tooltip Explanation for Needle Configuration Physics
         if (tooltipDesc) {
-            tooltipDesc.innerHTML = NEEDLE_TOOLTIP_PHYSICS[presetKey] || `<strong>${optName}:</strong> Delivers ~${mlPerSqin} mL/in² (${saturationPercent}% saturation) at ${rate} in²/hr.`;
+            tooltipDesc.innerHTML = NEEDLE_TOOLTIP_PHYSICS[presetKey] || TP("x.delivers_ml_in_saturation_at_in", "<strong>{0}:</strong> Delivers ~{1} mL/in² ({2}% saturation) at {3} in²/hr.", optName, mlPerSqin, saturationPercent, rate);
         }
 
         if (badgeEl) {
@@ -3380,7 +3403,7 @@ function initializeUnitConverter() {
         const wasteGrossVal = document.getElementById('converter-waste-gross-val');
 
         if (wasteBadge) {
-            wasteBadge.textContent = `~${wastePct}% Cartridge Retention`;
+            wasteBadge.textContent = TP("x.cartridge_retention", "~{0}% Cartridge Retention", wastePct);
         }
 
         const sqinVal = sqinInput && sqinInput.value ? parseFloat(sqinInput.value) : null;
@@ -3418,16 +3441,16 @@ function initializeUnitConverter() {
             `;
         } else {
             if (wasteDetails) {
-                wasteDetails.textContent = `+0.00 mL Overhead`;
+                wasteDetails.textContent = TP("x.0_00_ml_overhead", "+0.00 mL Overhead");
             }
             if (wasteGrossVal) {
-                wasteGrossVal.textContent = `Gross: -- mL`;
+                wasteGrossVal.textContent = TP("x.gross_ml", "Gross: -- mL");
             }
 
             const volDesc = currentVolUnit === 'floz' 
                 ? `${flozPerSqin} fl oz/sq in (${flozPerSqcm} fl oz/cm²)` 
                 : `${mlPerSqin} mL/sq in (${mlPerSqcm} mL/cm²)`;
-            textEl.innerHTML = `<strong>${optName}:</strong> Baseline speed of <strong>${rate} sq in/hr</strong> (${rateSqcm} cm²/hr) with <strong>${volDesc}</strong> ink density. Enter an area above to view real-time calculations.`;
+            textEl.innerHTML = TP("x.baseline_speed_of_sq_in_hr", "<strong>{0}:</strong> Baseline speed of <strong>{1} sq in/hr</strong> ({2} cm²/hr) with <strong>{3}</strong> ink density. Enter an area above to view real-time calculations.", optName, rate, rateSqcm, volDesc);
         }
     }
 
@@ -3435,7 +3458,7 @@ function initializeUnitConverter() {
         toggleBtn.addEventListener('click', function() {
             const isHidden = bodyEl.style.display === 'none';
             bodyEl.style.display = isHidden ? 'block' : 'none';
-            if (toggleIcon) toggleIcon.textContent = isHidden ? '▼ Toggle Converter' : '▲ Collapse Converter';
+            if (toggleIcon) toggleIcon.textContent = isHidden ? T("x.toggle_converter", "▼ Toggle Converter") : T("x.collapse_converter", "▲ Collapse Converter");
         });
     }
 
@@ -3499,7 +3522,7 @@ function initializeUnitConverter() {
             btn.disabled = !hasHistory;
             if (hasHistory) {
                 btn.removeAttribute('disabled');
-                btn.title = `Undo last filter or preset change (${converterHistoryStack.length} in history)`;
+                btn.title = TP("x.undo_last_filter_or_preset_change_2", "Undo last filter or preset change ({0} in history)", converterHistoryStack.length);
             } else {
                 btn.setAttribute('disabled', 'true');
                 btn.title = 'No previous changes to undo';
@@ -3795,7 +3818,7 @@ function initializeUnitConverter() {
                 const copyIcon = document.getElementById('converter-copy-result-icon');
                 const copyLabel = document.getElementById('converter-copy-result-text');
                 if (copyIcon) copyIcon.textContent = '✓';
-                if (copyLabel) copyLabel.textContent = 'Copied!';
+                if (copyLabel) copyLabel.textContent = T("x.copied", "Copied!");
 
                 if (typeof showToastNotification === 'function') {
                     showToastNotification('💬 <strong>Copy Result</strong>: Clean chat summary copied to clipboard!');
@@ -3804,7 +3827,7 @@ function initializeUnitConverter() {
                 setTimeout(() => {
                     converterCopyResultBtn.classList.remove('converter-copy-btn--copied');
                     if (copyIcon) copyIcon.textContent = '💬';
-                    if (copyLabel) copyLabel.textContent = 'Copy Result';
+                    if (copyLabel) copyLabel.textContent = T("btn_copy_result", "Copy Result");
                 }, 2500);
             }
 
@@ -3926,7 +3949,7 @@ function initializeUnitConverter() {
             const apptDate = document.getElementById('appt-date');
 
             if (apptClient && (!apptClient.value || apptClient.value.startsWith('Auto-Synced:'))) {
-                apptClient.value = `Auto-Synced: ${optTitle}`;
+                apptClient.value = TP("x.auto_synced", "Auto-Synced: {0}", optTitle);
             }
             if (apptDate && !apptDate.value) {
                 apptDate.value = new Date().toISOString().slice(0, 10);
@@ -4080,7 +4103,7 @@ function initializeUnitConverter() {
                 const copyIcon = document.getElementById('converter-copy-btn-icon');
                 const copyLabel = document.getElementById('converter-copy-btn-text');
                 if (copyIcon) copyIcon.textContent = '✓';
-                if (copyLabel) copyLabel.textContent = 'Copied!';
+                if (copyLabel) copyLabel.textContent = T("x.copied", "Copied!");
 
                 if (typeof showToastNotification === 'function') {
                     showToastNotification('📋 <strong>Copied to Clipboard</strong>: Formatted ink volume & needle specification summary ready to paste!');
@@ -4089,7 +4112,7 @@ function initializeUnitConverter() {
                 setTimeout(() => {
                     converterCopyBtn.classList.remove('converter-copy-btn--copied');
                     if (copyIcon) copyIcon.textContent = '📋';
-                    if (copyLabel) copyLabel.textContent = 'Copy to Clipboard';
+                    if (copyLabel) copyLabel.textContent = T("btn_copy_summary", "Copy to Clipboard");
                 }, 2500);
             }
 
@@ -4171,7 +4194,7 @@ function initializeUnitConverter() {
             if (slipDate) slipDate.textContent = new Date().toLocaleString();
 
             const slipRef = document.getElementById('slip-ref');
-            if (slipRef) slipRef.textContent = '#POLI-' + Math.floor(100000 + Math.random() * 900000);
+            if (slipRef) slipRef.textContent = T("x.poli", "#POLI-") + Math.floor(100000 + Math.random() * 900000);
 
             // Populate Table
             const slipDynamic = document.getElementById('slip-dynamic-content');
@@ -4817,27 +4840,27 @@ function exportResultTXT(type) {
 
     if (type === 'coverage') {
         text += `Type: Coverage Calculation\n`;
-        text += `Total Coverage: ${document.getElementById('coverage-total').textContent} sq in (${document.getElementById('coverage-metric').textContent} cm²)\n`;
-        text += `Working Time: ${document.getElementById('coverage-worktime').textContent}\n`;
-        text += `Coverage Rate: ${document.getElementById('coverage-rate').textContent} sq in/hr\n`;
+        text += TP("x.total_coverage_sq_in_cm_n", "Total Coverage: {0} sq in ({1} cm²)\\n", document.getElementById('coverage-total').textContent, document.getElementById('coverage-metric').textContent);
+        text += TP("x.working_time_n", "Working Time: {0}\\n", document.getElementById('coverage-worktime').textContent);
+        text += TP("x.coverage_rate_sq_in_hr_n", "Coverage Rate: {0} sq in/hr\\n", document.getElementById('coverage-rate').textContent);
     } else if (type === 'session') {
         text += `Type: Session Time Estimate\n`;
-        text += `Total Time: ${document.getElementById('session-total-time').textContent}\n`;
-        text += `Sessions Needed: ${document.getElementById('session-count').textContent}\n`;
-        text += `Per Session Duration: ${document.getElementById('session-per-session').textContent}\n`;
-        text += `Timeline: ${document.getElementById('session-timeline').textContent}\n`;
+        text += TP("x.total_time_n", "Total Time: {0}\\n", document.getElementById('session-total-time').textContent);
+        text += TP("x.sessions_needed_n", "Sessions Needed: {0}\\n", document.getElementById('session-count').textContent);
+        text += TP("x.per_session_duration_n", "Per Session Duration: {0}\\n", document.getElementById('session-per-session').textContent);
+        text += TP("x.timeline_n", "Timeline: {0}\\n", document.getElementById('session-timeline').textContent);
     } else if (type === 'ink') {
         text += `Type: Ink Consumption Estimate\n`;
-        text += `Total Ink: ${document.getElementById('ink-total').textContent}\n`;
-        text += `Per Color: ${document.getElementById('ink-per-color').textContent}\n`;
-        text += `Ink Caps: ${document.getElementById('ink-caps').textContent}\n`;
-        text += `Estimated Cost: ${document.getElementById('ink-cost').textContent}\n`;
+        text += TP("x.total_ink_n", "Total Ink: {0}\\n", document.getElementById('ink-total').textContent);
+        text += TP("x.per_color_n", "Per Color: {0}\\n", document.getElementById('ink-per-color').textContent);
+        text += TP("x.ink_caps_n", "Ink Caps: {0}\\n", document.getElementById('ink-caps').textContent);
+        text += TP("x.estimated_cost_n", "Estimated Cost: {0}\\n", document.getElementById('ink-cost').textContent);
     } else if (type === 'pricing') {
         text += `Type: Pricing Estimate\n`;
-        text += `Suggested Price: ${document.getElementById('pricing-suggested').textContent}\n`;
-        text += `Price Range: ${document.getElementById('pricing-range').textContent}\n`;
-        text += `Deposit: ${document.getElementById('pricing-deposit').textContent}\n`;
-        text += `Per Square Inch: ${document.getElementById('pricing-per-sqin').textContent}\n`;
+        text += TP("x.suggested_price_n", "Suggested Price: {0}\\n", document.getElementById('pricing-suggested').textContent);
+        text += TP("x.price_range_n", "Price Range: {0}\\n", document.getElementById('pricing-range').textContent);
+        text += TP("x.deposit_n", "Deposit: {0}\\n", document.getElementById('pricing-deposit').textContent);
+        text += TP("x.per_square_inch_n", "Per Square Inch: {0}\\n", document.getElementById('pricing-per-sqin').textContent);
     }
 
     text += `\n---\nPowered by Poli International (https://poliinternational.com)`;
@@ -4959,7 +4982,7 @@ function pauseSessionTimer() {
 
     if (startBtn) {
         startBtn.style.display = 'inline-flex';
-        startBtn.textContent = '▶ Resume Session';
+        startBtn.textContent = T("x.resume_session", "▶ Resume Session");
     }
     if (pauseBtn) pauseBtn.style.display = 'none';
 
@@ -4972,7 +4995,7 @@ function resetSessionTimer() {
     sessionTimerState.laps = [];
 
     const startBtn = document.getElementById('timer-start-btn');
-    if (startBtn) startBtn.textContent = '▶ Start Session';
+    if (startBtn) startBtn.textContent = T("btn_start_timer", "▶ Start Session");
 
     const lapsList = document.getElementById('timer-laps-list');
     if (lapsList) {
@@ -5023,9 +5046,9 @@ function updateSessionTimerDisplay() {
     // Update target text
     if (targetDisplay) {
         if (sessionTimerState.targetSeconds > 0) {
-            targetDisplay.textContent = `${(sessionTimerState.targetSeconds / 3600).toFixed(1)} hrs (${sessionTimerState.mode})`;
+            targetDisplay.textContent = TP("x.hrs", "{0} hrs ({1})", (sessionTimerState.targetSeconds / 3600).toFixed(1), sessionTimerState.mode);
         } else {
-            targetDisplay.textContent = 'Not Set (Run Estimate)';
+            targetDisplay.textContent = T("x.not_set_run_estimate", "Not Set (Run Estimate)");
         }
     }
 
@@ -5038,26 +5061,26 @@ function updateSessionTimerDisplay() {
             if (pct >= 100) {
                 progressBar.style.background = '#ef4444';
                 if (statusTag) {
-                    statusTag.textContent = '⚠️ Over Estimate';
+                    statusTag.textContent = T("x.over_estimate", "⚠️ Over Estimate");
                     statusTag.style.color = '#ef4444';
                 }
             } else if (pct > 80) {
                 progressBar.style.background = '#f59e0b';
                 if (statusTag) {
-                    statusTag.textContent = '⚡ Nearing Target';
+                    statusTag.textContent = T("x.nearing_target", "⚡ Nearing Target");
                     statusTag.style.color = '#f59e0b';
                 }
             } else {
                 progressBar.style.background = 'linear-gradient(90deg, #0693e3, #ff006e)';
                 if (statusTag) {
-                    statusTag.textContent = '✓ On Pace';
+                    statusTag.textContent = T("x.on_pace", "✓ On Pace");
                     statusTag.style.color = '#10b981';
                 }
             }
         } else {
             progressBar.style.width = '0%';
             if (statusTag) {
-                statusTag.textContent = sessionTimerState.isRunning ? 'Active' : 'Ready';
+                statusTag.textContent = sessionTimerState.isRunning ? T("x.active", "Active") : T("x.ready", "Ready");
                 statusTag.style.color = '#10b981';
             }
         }
@@ -5099,7 +5122,7 @@ function initializeComparisonWidget() {
         toggleBtn.addEventListener('click', function() {
             const isHidden = bodyEl.style.display === 'none';
             bodyEl.style.display = isHidden ? 'block' : 'none';
-            if (toggleIcon) toggleIcon.textContent = isHidden ? '▲ Collapse Comparison Mode' : '▼ Toggle Comparison Mode';
+            if (toggleIcon) toggleIcon.textContent = isHidden ? T("x.collapse_comparison_mode", "▲ Collapse Comparison Mode") : T("x.toggle_comparison_mode", "▼ Toggle Comparison Mode");
             if (isHidden) {
                 populateComparisonDropdowns();
             }
@@ -5460,19 +5483,19 @@ function renderSessionHealthScore(data) {
     barEl.style.width = score + '%';
 
     if (score >= 85) {
-        badgeEl.textContent = `${score}/100 • Optimal Health`;
+        badgeEl.textContent = TP("x.100_optimal_health", "{0}/100 • Optimal Health", score);
         badgeEl.style.background = 'rgba(16, 185, 129, 0.2)';
         badgeEl.style.color = '#10b981';
         badgeEl.style.borderColor = '#10b981';
         barEl.style.backgroundColor = '#10b981';
     } else if (score >= 65) {
-        badgeEl.textContent = `${score}/100 • Moderate Workload Risk`;
+        badgeEl.textContent = TP("x.100_moderate_workload_risk", "{0}/100 • Moderate Workload Risk", score);
         badgeEl.style.background = 'rgba(245, 158, 11, 0.2)';
         badgeEl.style.color = '#f59e0b';
         badgeEl.style.borderColor = '#f59e0b';
         barEl.style.backgroundColor = '#f59e0b';
     } else {
-        badgeEl.textContent = `${score}/100 • High Fatigue & Twitch Risk`;
+        badgeEl.textContent = TP("x.100_high_fatigue_twitch_risk", "{0}/100 • High Fatigue & Twitch Risk", score);
         badgeEl.style.background = 'rgba(239, 68, 68, 0.2)';
         badgeEl.style.color = '#ef4444';
         badgeEl.style.borderColor = '#ef4444';
@@ -5614,17 +5637,17 @@ function updateAnatomicalCallout(locationKey) {
 
     const data = ANATOMICAL_LOCATION_DATA[locationKey] || ANATOMICAL_LOCATION_DATA['outer-upper-arm'];
 
-    if (nameEl) nameEl.textContent = `🦾 Muscle Group: ${data.muscle}`;
+    if (nameEl) nameEl.textContent = TP("x.muscle_group", "🦾 Muscle Group: {0}", data.muscle);
     if (badgeEl) {
         badgeEl.textContent = data.badge;
         badgeEl.style.backgroundColor = `${data.badgeColor}25`;
         badgeEl.style.color = data.badgeColor;
     }
     if (detailEl) {
-        detailEl.innerHTML = `<strong>Skin Tension:</strong> ${data.detail}`;
+        detailEl.innerHTML = TP("x.skin_tension_2", "<strong>Skin Tension:</strong> {0}", data.detail);
     }
     if (tipEl) {
-        tipEl.innerHTML = `💡 <strong>Ergonomic Tip:</strong> ${data.tip}`;
+        tipEl.innerHTML = TP("x.ergonomic_tip_2", "💡 <strong>Ergonomic Tip:</strong> {0}", data.tip);
     }
 }
 
@@ -5782,7 +5805,7 @@ function openSessionSummaryModal() {
 
     if (breakEl) {
         const breakCount = (typeof sessionTimerState !== 'undefined') ? sessionTimerState.breakCount : 1;
-        breakEl.textContent = `${breakCount} break(s) logged`;
+        breakEl.textContent = TP("x.break_s_logged", "{0} break(s) logged", breakCount);
     }
 
     modalEl.style.display = 'flex';
@@ -5979,7 +6002,7 @@ function setupSearchableSelect(searchInputId, selectId, countBadgeId, clearBtnId
         if (badge && countText) {
             if (query.length > 0) {
                 badge.style.display = 'flex';
-                countText.textContent = `${matchCount} matching ink${matchCount === 1 ? '' : 's'}`;
+                countText.textContent = TP("x.matching_ink", "{0} matching ink{1}", matchCount, matchCount === 1 ? '' : 's');
             } else {
                 badge.style.display = 'none';
             }
@@ -6000,7 +6023,7 @@ function setupSearchableSelect(searchInputId, selectId, countBadgeId, clearBtnId
                 showToast({
                     type: 'info',
                     title: 'Brand Selected',
-                    message: `Selected "${firstMatch.textContent}"`,
+                    message: TP("x.selected", "Selected \"{0}\"", firstMatch.textContent),
                     duration: 2500
                 });
             }
@@ -6140,7 +6163,7 @@ function renderStudioBottlesTable() {
     const lowBottles = bottles.filter(b => b.currentMl < minThreshold);
 
     if (lowCountEl) {
-        lowCountEl.textContent = `${lowBottles.length} Bottle${lowBottles.length === 1 ? '' : 's'} Low (< ${minThreshold} mL)`;
+        lowCountEl.textContent = TP("x.bottle_low_ml", "{0} Bottle{1} Low (< {2} mL)", lowBottles.length, lowBottles.length === 1 ? '' : 's', minThreshold);
         lowCountEl.style.color = lowBottles.length > 0 ? '#ef4444' : '#10b981';
     }
 
@@ -6351,7 +6374,7 @@ function renderInventoryWasteChart(family = 'all') {
     const whitesRatio = ((whitesW / (whitesC + whitesW)) * 100).toFixed(1);
 
     if (highestLineEl) {
-        highestLineEl.textContent = `Vivid Colors (${colorsRatio}%)`;
+        highestLineEl.textContent = TP("x.vivid_colors", "Vivid Colors ({0}%)", colorsRatio);
     }
 
     // Render Ratio Matrix Chips
@@ -6792,10 +6815,10 @@ function renderDashboardStockAlertCenter() {
 
     if (badgeEl) {
         if (lowBottles.length > 0) {
-            badgeEl.textContent = `🚨 ${lowBottles.length} CRITICAL LOW`;
+            badgeEl.textContent = TP("x.critical_low", "🚨 {0} CRITICAL LOW", lowBottles.length);
             badgeEl.className = 'coverage__dash-stock-badge coverage__dash-stock-badge--alert';
         } else {
-            badgeEl.textContent = '✓ ALL INKS ADEQUATE';
+            badgeEl.textContent = T("x.all_inks_adequate", "✓ ALL INKS ADEQUATE");
             badgeEl.className = 'coverage__dash-stock-badge coverage__dash-stock-badge--ok';
         }
     }
@@ -7500,7 +7523,7 @@ function renderTourStep() {
 
     if (prevBtn) prevBtn.disabled = currentTourStep === 0;
     if (nextBtn) {
-        nextBtn.textContent = currentTourStep === TOUR_STEPS.length - 1 ? 'Finish Tour ✓' : 'Next Step →';
+        nextBtn.textContent = currentTourStep === TOUR_STEPS.length - 1 ? T("x.finish_tour", "Finish Tour ✓") : T("x.next_step", "Next Step →");
     }
 }
 
@@ -7797,7 +7820,7 @@ function checkGoalMilestonesNotification(elapsedSeconds) {
 function showGoalReachedToast(title, hours) {
     const toast = document.createElement('div');
     toast.style.cssText = 'position: fixed; bottom: 20px; right: 20px; z-index: 10005; background: #10b981; color: white; padding: 1rem 1.25rem; border-radius: 10px; font-weight: 700; box-shadow: 0 10px 25px rgba(0,0,0,0.5); display: flex; align-items: center; gap: 0.75rem; font-size: 0.92rem; animation: slideIn 0.3s ease;';
-    toast.innerHTML = `<span>🎯 Milestone Reached (${hours}h)!</span> <span>${title}</span>`;
+    toast.innerHTML = TP("x.milestone_reached_h", "<span>🎯 Milestone Reached ({0}h)!</span> <span>{1}</span>", hours, title);
     document.body.appendChild(toast);
     setTimeout(() => {
         toast.remove();
@@ -7889,11 +7912,11 @@ function toggleEfficiencyPrintMode(forceState = null) {
         if (isEfficiencyPrintMode) {
             panel.classList.add('efficiency-dashboard--print-mode');
             if (banner) banner.style.display = 'flex';
-            if (printBtn) printBtn.textContent = '✕ Exit Print View';
+            if (printBtn) printBtn.textContent = T("x.exit_print_view", "✕ Exit Print View");
         } else {
             panel.classList.remove('efficiency-dashboard--print-mode');
             if (banner) banner.style.display = 'none';
-            if (printBtn) printBtn.textContent = '🖨️ High-Contrast Print View';
+            if (printBtn) printBtn.textContent = T("x.high_contrast_print_view", "🖨️ High-Contrast Print View");
         }
     }
 
@@ -8194,7 +8217,7 @@ function initializeClientEmailModal() {
                 previewEl.select();
                 navigator.clipboard.writeText(previewEl.value).then(() => {
                     const origText = copyBtn.textContent;
-                    copyBtn.textContent = '✅ Copied to Clipboard!';
+                    copyBtn.textContent = T("toast_copied", "✅ Copied to Clipboard!");
                     setTimeout(() => copyBtn.textContent = origText, 2000);
                 });
             }
@@ -8233,7 +8256,7 @@ function generateClientEmailText() {
     const includeCare = document.getElementById('email-include-care')?.checked;
 
     const totalTimeEl = document.getElementById('session-total-time');
-    const estimatedTime = totalTimeEl ? totalTimeEl.textContent : '3 - 4 hours';
+    const estimatedTime = totalTimeEl ? totalTimeEl.textContent : T("x.3_4_hours", "3 - 4 hours");
 
     const locationSelect = document.getElementById('body-location');
     const locName = locationSelect && locationSelect.selectedIndex >= 0 ? locationSelect.options[locationSelect.selectedIndex].text : 'Selected Area';
@@ -8536,7 +8559,7 @@ function openGoogleCalendarModal() {
     // Pre-populate Form Fields
     const titleInput = document.getElementById('gcal-event-title');
     if (titleInput) {
-        titleInput.value = `Tattoo Session: ${locName} (${durationHours} hrs)`;
+        titleInput.value = TP("x.tattoo_session_hrs", "Tattoo Session: {0} ({1} hrs)", locName, durationHours);
     }
 
     const durationInput = document.getElementById('gcal-event-duration');
@@ -8562,9 +8585,9 @@ function openGoogleCalendarModal() {
     }
 
     // Build comprehensive structured event notes
-    const totalTimeStr = totalTimeEl ? totalTimeEl.textContent : `${durationHours} hours`;
-    const countStr = sessionCountEl ? sessionCountEl.textContent : '1 session';
-    const timelineStr = timelineEl ? timelineEl.textContent : '1 - 2 weeks';
+    const totalTimeStr = totalTimeEl ? totalTimeEl.textContent : TP("x.hours", "{0} hours", durationHours);
+    const countStr = sessionCountEl ? sessionCountEl.textContent : T("x.1_session", "1 session");
+    const timelineStr = timelineEl ? timelineEl.textContent : T("x.1_2_weeks", "1 - 2 weeks");
 
     const notesText = `══════════════════════════════════════════════
 TATTOO SESSION APPOINTMENT SPECIFICATIONS
@@ -8648,7 +8671,7 @@ function updateGoogleCalendarLinks() {
 
     const hoursDisplayEl = document.getElementById('gcal-hours-display');
     if (hoursDisplayEl) {
-        hoursDisplayEl.textContent = `${durationHours.toFixed(1)} hrs`;
+        hoursDisplayEl.textContent = TP("x.hrs_2", "{0} hrs", durationHours.toFixed(1));
     }
 
     // Format ISO strings for Google Calendar: YYYYMMDDTHHmmSS
@@ -8731,7 +8754,7 @@ function copyGoogleCalendarDetails() {
     const titleInput = document.getElementById('gcal-event-title');
     const windowDisplayEl = document.getElementById('gcal-window-display');
 
-    const text = `${titleInput ? titleInput.value : 'Tattoo Session'}\nTime Window: ${windowDisplayEl ? windowDisplayEl.textContent : ''}\n\n${notesInput ? notesInput.value : ''}`;
+    const text = TP("x.ntime_window_n_n", "{0}\\nTime Window: {1}\\n\\n{2}", titleInput ? titleInput.value : 'Tattoo Session', windowDisplayEl ? windowDisplayEl.textContent : '', notesInput ? notesInput.value : '');
 
     if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(text).then(() => {
