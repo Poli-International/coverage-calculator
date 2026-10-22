@@ -8258,9 +8258,9 @@ function initializeClientEmailModal() {
             if (previewEl) {
                 previewEl.select();
                 navigator.clipboard.writeText(previewEl.value).then(() => {
-                    const origText = copyBtn.textContent;
+                    const origText = copyBtn.innerHTML;
                     copyBtn.textContent = T("toast_copied", "Copied to Clipboard!");
-                    setTimeout(() => copyBtn.textContent = origText, 2000);
+                    setTimeout(() => copyBtn.innerHTML = origText, 2000);
                 });
             }
         });
